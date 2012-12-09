@@ -1,7 +1,6 @@
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 
 public class DateField extends TextField 

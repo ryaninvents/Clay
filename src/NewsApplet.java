@@ -1,4 +1,4 @@
-import java.awt.Rectangle;
+
 
 
 public class NewsApplet extends Applet implements SwipeEventListener

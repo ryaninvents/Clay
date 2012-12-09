@@ -1,4 +1,4 @@
-import java.awt.Rectangle;
+
 
 
 public class SketchApplet extends Applet implements PluginFunction

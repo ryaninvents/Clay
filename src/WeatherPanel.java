@@ -23,7 +23,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Properties;
 
 import javax.imageio.ImageIO;

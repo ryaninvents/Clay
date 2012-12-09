@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -186,17 +185,12 @@ public class XCalendar
 	}
 	
 	public static GregorianCalendar getCalendar(String string) {
-		// TODO Auto-generated method stub
-		int year = Integer.valueOf(string.substring(0, 4));
-		int month = Integer.valueOf(string.substring(5, 7))-1;
-		int day = Integer.valueOf(string.substring(8, 10));
-		int hour = 0;
-		int minute = 0;
-		
+		Integer.valueOf(string.substring(0, 4));
+		Integer.valueOf(string.substring(8, 10));
 		if (string.indexOf('T') == 10)
 		{
-			hour = Integer.valueOf(string.substring(11, 13));
-			minute = Integer.valueOf(string.substring(14, 16));
+			Integer.valueOf(string.substring(11, 13));
+			Integer.valueOf(string.substring(14, 16));
 			
 		}
 		

@@ -1,4 +1,4 @@
-import java.awt.Rectangle;
+
 
 
 public class CalendarApplet extends Applet implements SwipeEventListener

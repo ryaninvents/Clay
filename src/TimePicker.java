@@ -64,7 +64,6 @@ public class TimePicker extends Component
 		System.out.println("TimePicker.event");
 		if (ev.type == EventType.MouseClicked)
 		{
-			MouseEvent me = (MouseEvent)ev;
 		}
 		
 	}

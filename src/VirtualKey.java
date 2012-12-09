@@ -1,6 +1,5 @@
 
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
 
@@ -42,7 +41,6 @@ public class VirtualKey extends Button
 		System.out.println("VirtualKey.event");
 		if (ev instanceof MouseEvent)
 		{
-			MouseEvent me = (MouseEvent)ev;
 			if (ev.type == EventType.MousePressed)
 			{
 				pressed = true;

@@ -93,7 +93,6 @@ public class DateView extends ComponentContainer
 		{
 			long startTime = ce.start.getTimeInMillis();
 			long endTime = ce.end.getTimeInMillis();
-			long duration = endTime - startTime;
 			int startHour = ce.start.get(Calendar.HOUR_OF_DAY);
 			int startMinute = ce.start.get(Calendar.MINUTE);
 			int endHour = ce.end.get(Calendar.HOUR_OF_DAY);

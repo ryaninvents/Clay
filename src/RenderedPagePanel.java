@@ -95,10 +95,9 @@ public class RenderedPagePanel extends AppletPanel
 		fontMap.put("p", new Font("Arial", Font.PLAIN, 16));
 
 		Source source = null;
-		String anchor;
 		if (filename.indexOf("#") > 0)
 		{
-			anchor = filename.substring(filename.indexOf("#") + 1);
+			filename.substring(filename.indexOf("#") + 1);
 			filename = filename.substring(0, filename.indexOf("#"));
 		}
 		try

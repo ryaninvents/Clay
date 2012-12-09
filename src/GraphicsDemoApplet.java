@@ -1,4 +1,4 @@
-import java.awt.Rectangle;
+
 
 
 public class GraphicsDemoApplet extends Applet {

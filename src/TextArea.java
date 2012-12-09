@@ -34,7 +34,7 @@ public class TextArea extends Component
 		gg.setFont(font);
 		FontMetrics metrics = null;
 		metrics = gg.getFontMetrics();
-		Rectangle textBounds = metrics.getStringBounds(fieldText, gg).getBounds();
+		metrics.getStringBounds(fieldText, gg).getBounds();
 		gg.setStroke(new BasicStroke(1));
 		gg.setColor(Color.BLACK);
 		gg.drawRoundRect(1, 1, bounds.width-2, bounds.height-2, 4, 4);
@@ -44,7 +44,7 @@ public class TextArea extends Component
 		}
 		gg.drawRoundRect(2, 2, bounds.width -4, bounds.height-4, 3, 3);
 		gg.setColor(Color.BLACK);
-		String s[] = fieldText.split("\\s");
+		fieldText.split("\\s");
 		int width = 0;
 		int y = 0;
 		int dy = 5;

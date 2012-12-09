@@ -243,7 +243,6 @@ public class Button extends Component
 			System.out.println("Button.event");
 		if (ev instanceof MouseEvent)
 		{
-			MouseEvent me = (MouseEvent)ev;
 			if (ev.type == EventType.MousePressed)
 			{
 				pressed = true;

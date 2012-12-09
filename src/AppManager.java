@@ -152,7 +152,6 @@ public class AppManager implements EventListener //MouseEventListener, KeyEventL
 		System.out.println("================================================================================");
 		if (ev instanceof MouseEvent)
 		{
-			MouseEvent me = (MouseEvent) ev;
 			switch (ev.type)
 			{
 				case MousePressed:
@@ -313,8 +312,6 @@ public class AppManager implements EventListener //MouseEventListener, KeyEventL
 	{
 		// TODO Auto-generated method stub
 		Configuration.load();
-		boolean Kobo = true;
-		
 		try
 		{
 			fb = new EInkFB("/dev/fb0");
