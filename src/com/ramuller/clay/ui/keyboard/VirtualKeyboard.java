@@ -30,7 +30,7 @@ public class VirtualKeyboard {
 		view.addRow(row);
 		row = new KeyboardRow("asdfghjkl;",view);
 		view.addRow(row);
-		row = new KeyboardRow("zxcvbnm",view);
+		row = new KeyboardRow("zxcvbnm,.",view);
 		view.addRow(row);
 		row = new KeyboardRow("# ^",view);
 		view.addRow(row);
@@ -65,5 +65,13 @@ public class VirtualKeyboard {
 		for(KeyboardView view : views){
 			view.reflow();
 		}
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
 	}
 }

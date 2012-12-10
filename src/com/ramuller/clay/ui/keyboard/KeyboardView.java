@@ -25,7 +25,7 @@ public class KeyboardView {
 	}
 	public int getWidth(){
 		return parent.getWidth();
-	}
+	} 
 	public int getHeight(){
 		return parent.getHeight();
 	}
@@ -38,5 +38,12 @@ public class KeyboardView {
 	public void addRow(KeyboardRow row){
 		rows.add(row);
 		reflow();
+	}
+	public int getX(){
+		return parent.getX();
+	}
+
+	public int getY() {
+		return parent.getY();
 	}
 }
