@@ -8,17 +8,18 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.swing.JCheckBox;
+import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 
 import com.ramuller.sumerian.display.Display;
 import com.ramuller.sumerian.display.SwingDisplay;
-
 
 
 /**
@@ -28,6 +29,7 @@ import com.ramuller.sumerian.display.SwingDisplay;
 public class Sumerian extends JPanel implements ActionListener {
 	Display display;
 	JCheckBox checkbox;
+	JEditorPane html;
 	/**
 	 * 
 	 */
@@ -42,15 +44,34 @@ public class Sumerian extends JPanel implements ActionListener {
 		this.setLayout(new BorderLayout());
 
         checkbox = new JCheckBox("Show Title", true);
-        checkbox.setSize(300, 100);
-        this.add(checkbox);
+        checkbox.setSize(300, 50);
+        this.add(checkbox,BorderLayout.NORTH);
+        
+        try {
+        	URL start = getClass().getClassLoader().getResource("index.html");
+			html = new JEditorPane(start);
+			html.setSize(new Dimension(600,800));
+			html.setPreferredSize(new Dimension(600,800));
+			this.add(html,BorderLayout.CENTER);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
 	}
 	
 	public void redraw(){
 		Graphics2D gg = (Graphics2D) display.graphics.create();
-		paintComponent(gg);
-		paintComponents(gg);
-		checkbox.paint(gg);
+
+		/*Image im = html.createImage(600, 800);
+		gg.drawImage(im, 0, 0, null);*/
+		
+		html.repaint();
+		gg.setClip(0,0,600,800);
+		gg.setColor(getBackground());
+		gg.fillRect(0,0,600,800);  
+		html.paint(gg); 
 		display.repaint();
 	}
 	
@@ -62,7 +83,7 @@ public class Sumerian extends JPanel implements ActionListener {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) {	    
 		EInkFB fb = null;
 		Display mainDisplay = null;
 		Sumerian su;
@@ -102,6 +123,7 @@ public class Sumerian extends JPanel implements ActionListener {
 		}
 
 		su = new Sumerian(mainDisplay);
+		try{Thread.sleep(1000);}catch(Exception e){}
 		su.redraw();
 	}
 
