@@ -8,9 +8,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URL;
 
@@ -47,27 +48,29 @@ public class Sumerian extends JPanel implements ActionListener {
         checkbox.setSize(300, 50);
         this.add(checkbox,BorderLayout.NORTH);
         
-        //try {
-        	//URL start = getClass().getClassLoader().getResource("index.html");
-			//html = new JEditorPane(start);
-        	html = new JEditorPane();
+        try {
+        	URL start = getClass().getClassLoader().getResource("index.html");
+			html = new JEditorPane(start);
+
 			html.setSize(new Dimension(600,800));
 			html.setPreferredSize(new Dimension(600,800));
 			this.add(html,BorderLayout.CENTER);
+			html.addPropertyChangeListener("page",new PropertyChangeListener(){
+
+				public void propertyChange(PropertyChangeEvent arg0) {
+					Sumerian.this.redraw();
+				}
+				
+			});
 			
-		/*} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (IOException e) {
 			e.printStackTrace();
-		}*/
+		}
         
 	}
 	
 	public void redraw(){
 		Graphics2D gg = (Graphics2D) display.graphics.create();
-
-		/*Image im = html.createImage(600, 800);
-		gg.drawImage(im, 0, 0, null);*/
-		
 		html.repaint();
 		gg.setClip(0,0,600,800);
 		gg.setColor(getBackground());
@@ -127,7 +130,6 @@ public class Sumerian extends JPanel implements ActionListener {
 		}
 
 		su = new Sumerian(mainDisplay);
-		try{Thread.sleep(1000);}catch(Exception e){}
 		su.redraw();
 	}
 

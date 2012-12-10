@@ -17,9 +17,7 @@ public class SwingDisplay extends Display
 	public SwingDisplay(int width, int height)
 	{
 		super(new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY));
-		System.out.println("Creating SwingDisplay...");
-		frame = new JFrame("Virtual Kobo Touch");
-		frame.setLocation(600, 50);
+		frame = new JFrame("Kobo Touch");
 		frame.getContentPane().setLayout(new BorderLayout());
 		icon = new JLabel(new ImageIcon(image));
 		frame.getContentPane().add(icon , BorderLayout.CENTER);
@@ -33,24 +31,18 @@ public class SwingDisplay extends Display
 	@Override
 	public void repaint(Rectangle region)
 	{
-		// TODO Auto-generated method stub
-		System.out.println("SwingDisplay.repaint(region) " + region.toString());
 		icon.repaint(region.x, region.y, region.width, region.height);
 
 	}
 
 	public void repaint()
 	{
-		// TODO Auto-generated method stub
-		System.out.println("SwingDisplay.repaint");
 		icon.repaint();
 
 	}
 
 	@Override
 	public void repaint(Rectangle region, boolean fastUpdate) {
-		// TODO Auto-generated method stub
-		System.out.println("SwingDisplay.repaint");
 		icon.repaint();
 		
 	}
