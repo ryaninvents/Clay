@@ -20,4 +20,8 @@ public class Event {
 		this.type = type;
 		this.when = when;
 	}
+	
+	public String describe(){
+		return type.toString();
+	}
 }

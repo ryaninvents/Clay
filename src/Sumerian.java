@@ -2,141 +2,125 @@
  * 
  */
 
-
-
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Rectangle;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.net.URL;
 
-import javax.swing.JCheckBox;
 import javax.swing.JEditorPane;
-import javax.swing.JPanel;
 
 import com.ramuller.sumerian.display.Display;
 import com.ramuller.sumerian.display.SwingDisplay;
-
+import com.ramuller.sumerian.input.Event;
+import com.ramuller.sumerian.input.EventListener;
+import com.ramuller.sumerian.input.KoboTouchInput;
+import com.ramuller.sumerian.ui.keyboard.VirtualKeyboard;
 
 /**
  * @author ryan
- *
+ * 
  */
-public class Sumerian extends JPanel implements ActionListener {
+public class Sumerian implements EventListener {
 	Display display;
-	JCheckBox checkbox;
 	JEditorPane html;
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4228329570825316212L;
-	
-	public Sumerian(Display display){
-		this.setSize(display.getWidth(), display.getHeight());
-		this.setPreferredSize(
-				new Dimension(display.getWidth(), display.getHeight()));
-		this.display = display;
-		
-		this.setLayout(new BorderLayout());
+	VirtualKeyboard keyboard;
 
-        checkbox = new JCheckBox("Show Title", true);
-        checkbox.setSize(300, 50);
-        this.add(checkbox,BorderLayout.NORTH);
-        
-        try {
-        	URL start = getClass().getClassLoader().getResource("index.html");
+	public Sumerian(Display display) {
+		this.display = display;
+		keyboard = new VirtualKeyboard();
+
+		try {
+			URL start = getClass().getClassLoader().getResource("index.html");
 			html = new JEditorPane(start);
 
-			html.setSize(new Dimension(600,800));
-			html.setPreferredSize(new Dimension(600,800));
-			this.add(html,BorderLayout.CENTER);
-			html.addPropertyChangeListener("page",new PropertyChangeListener(){
+			html.setSize(new Dimension(600, 800));
+			html.setPreferredSize(new Dimension(600, 800));
+			html.addPropertyChangeListener("page",
+					new PropertyChangeListener() {
 
-				public void propertyChange(PropertyChangeEvent arg0) {
-					Sumerian.this.redraw();
-				}
-				
-			});
-			
+						public void propertyChange(PropertyChangeEvent arg0) {
+							Sumerian.this.repaint();
+						}
+
+					});
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        
+
 	}
-	
-	public void redraw(){
+
+	public void repaint() {
 		Graphics2D gg = (Graphics2D) display.graphics.create();
-		html.repaint();
-		gg.setClip(0,0,600,800);
-		gg.setColor(getBackground());
-		gg.fillRect(0,0,600,800);  
-		html.paint(gg); 
-		display.repaint();
-	}
-	
-	public void paint(Graphics2D g){
-		super.paintAll((Graphics)g);
-		
+		/*html.repaint();
+		gg.setClip(0, 0, 600, 800);
+		gg.fillRect(0, 0, 600, 800);
+		html.paint(gg);*/
+		keyboard.paint(gg);
+		display.repaint(new Rectangle(0,0,599,799),true);
 	}
 
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {	    
+	public static void main(String[] args) {
 		EInkFB fb = null;
 		Display mainDisplay = null;
 		Sumerian su;
-		if(System.getProperty("user.home").length()<4){
-			try
-			{
+		if (System.getProperty("user.home").length() < 4) {
+			try {
 				fb = new EInkFB("/dev/fb0");
 				mainDisplay = new EInkDisplay(fb);
-				
-			}
-			catch (IOException e)
-			{
+
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
-			catch (UnsatisfiedLinkError e)
-			{
+
+			catch (UnsatisfiedLinkError e) {
 				e.printStackTrace();
-	//			System.out.println("Anscheinend kein EInk-Display vorhanden, deshalb Wechsel zu einem Swing-Display!");
-				
+				// System.out.println("Anscheinend kein EInk-Display vorhanden, deshalb Wechsel zu einem Swing-Display!");
+
 			}
-		}
-		
-		if (mainDisplay == null)
-		{
-			
-			mainDisplay = new SwingDisplay(600,800);
-			/*
-			SwingMouseInput smi = null;
-			SwingKeyInput ski = null;
-			smi = new SwingMouseInput();
-			ski = new SwingKeyInput();
-			((SwingDisplay)mainDisplay).frame.addMouseListener(smi);
-			((SwingDisplay)mainDisplay).frame.addMouseMotionListener(smi);
-			((SwingDisplay)mainDisplay).frame.addKeyListener(ski);
-			smi.addEventListener(appMan);
-			ski.addEventListener(appMan);*/
-			
+
+			su = new Sumerian(mainDisplay);
+
+			KoboTouchInput kti = null;
+			try {
+				kti = new KoboTouchInput("/dev/input/event1", true);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			kti.addEventListener(su);
+			kti.start();
+
 		}
 
-		su = new Sumerian(mainDisplay);
-		su.redraw();
+		if (mainDisplay == null) {
+
+			mainDisplay = new SwingDisplay(600, 800);
+
+			su = new Sumerian(mainDisplay);
+			/*
+			 * SwingMouseInput smi = null; SwingKeyInput ski = null; smi = new
+			 * SwingMouseInput(); ski = new SwingKeyInput();
+			 * ((SwingDisplay)mainDisplay).frame.addMouseListener(smi);
+			 * ((SwingDisplay)mainDisplay).frame.addMouseMotionListener(smi);
+			 * ((SwingDisplay)mainDisplay).frame.addKeyListener(ski);
+			 * smi.addEventListener(appMan); ski.addEventListener(appMan);
+			 */
+
+		}
+
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void event(Event ev) {
+		html.setText(ev.describe());
+		repaint();
 	}
 
 }
