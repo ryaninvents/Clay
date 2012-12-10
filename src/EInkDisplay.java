@@ -2,7 +2,7 @@
 
 import java.awt.Rectangle;
 
-import com.ramuller.sumerian.display.Display;
+import com.ramuller.clay.display.Display;
 
 
 public class EInkDisplay extends Display

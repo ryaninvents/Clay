@@ -1,4 +1,4 @@
-package com.ramuller.sumerian.event;
+package com.ramuller.clay.event;
 
 /*
  *  Copyright (c) 2012 Michael Zucchi

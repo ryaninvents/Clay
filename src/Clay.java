@@ -13,23 +13,23 @@ import java.net.URL;
 
 import javax.swing.JEditorPane;
 
-import com.ramuller.sumerian.display.Display;
-import com.ramuller.sumerian.display.SwingDisplay;
-import com.ramuller.sumerian.event.Event;
-import com.ramuller.sumerian.event.EventListener;
-import com.ramuller.sumerian.event.KoboTouchInput;
-import com.ramuller.sumerian.ui.keyboard.VirtualKeyboard;
+import com.ramuller.clay.display.Display;
+import com.ramuller.clay.display.SwingDisplay;
+import com.ramuller.clay.event.Event;
+import com.ramuller.clay.event.EventListener;
+import com.ramuller.clay.event.KoboTouchInput;
+import com.ramuller.clay.ui.keyboard.VirtualKeyboard;
 
 /**
  * @author ryan
  * 
  */
-public class Sumerian implements EventListener {
+public class Clay implements EventListener {
 	Display display;
 	JEditorPane html;
 	VirtualKeyboard keyboard;
 
-	public Sumerian(Display display) {
+	public Clay(Display display) {
 		this.display = display;
 		keyboard = new VirtualKeyboard();
 		
@@ -45,7 +45,7 @@ public class Sumerian implements EventListener {
 					new PropertyChangeListener() {
 
 						public void propertyChange(PropertyChangeEvent arg0) {
-							Sumerian.this.repaint();
+							Clay.this.repaint();
 						}
 
 					});
@@ -72,7 +72,7 @@ public class Sumerian implements EventListener {
 	public static void main(String[] args) {
 		EInkFB fb = null;
 		Display mainDisplay = null;
-		Sumerian su;
+		Clay su;
 		if (System.getProperty("user.home").length() < 4) {
 			try {
 				fb = new EInkFB("/dev/fb0");
@@ -89,7 +89,7 @@ public class Sumerian implements EventListener {
 
 			}
 
-			su = new Sumerian(mainDisplay);
+			su = new Clay(mainDisplay);
 
 			KoboTouchInput kti = null;
 			try {
@@ -106,7 +106,7 @@ public class Sumerian implements EventListener {
 		if (mainDisplay == null) {
 			mainDisplay = new SwingDisplay(600, 800);
 
-			su = new Sumerian(mainDisplay);
+			su = new Clay(mainDisplay);
 			/*
 			 * SwingMouseInput smi = null; SwingKeyInput ski = null; smi = new
 			 * SwingMouseInput(); ski = new SwingKeyInput();

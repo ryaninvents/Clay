@@ -1,4 +1,4 @@
-package com.ramuller.sumerian.display;
+package com.ramuller.clay.display;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;

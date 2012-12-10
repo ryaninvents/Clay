@@ -1,4 +1,4 @@
-package com.ramuller.sumerian.ui.keyboard;
+package com.ramuller.clay.ui.keyboard;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
