@@ -1,4 +1,5 @@
-package com.ramuller.sumerian.display.eink;
+
+
 import java.awt.Rectangle;
 
 import com.ramuller.sumerian.display.Display;

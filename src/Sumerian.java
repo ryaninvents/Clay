@@ -1,22 +1,23 @@
 /**
  * 
  */
-package com.ramuller.sumerian;
 
+
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 import com.ramuller.sumerian.display.Display;
 import com.ramuller.sumerian.display.SwingDisplay;
-import com.ramuller.sumerian.display.eink.EInkDisplay;
-import com.ramuller.sumerian.display.eink.EInkFB;
 
 
 
@@ -26,6 +27,7 @@ import com.ramuller.sumerian.display.eink.EInkFB;
  */
 public class Sumerian extends JPanel implements ActionListener {
 	Display display;
+	JCheckBox checkbox;
 	/**
 	 * 
 	 */
@@ -33,21 +35,23 @@ public class Sumerian extends JPanel implements ActionListener {
 	
 	public Sumerian(Display display){
 		this.setSize(display.getWidth(), display.getHeight());
+		this.setPreferredSize(
+				new Dimension(display.getWidth(), display.getHeight()));
 		this.display = display;
+		
+		this.setLayout(new BorderLayout());
 
-        JCheckBox checkbox = new JCheckBox("Show Title", true);
-        checkbox.setFocusable(false);
-        checkbox.addActionListener(this);
-        add(checkbox);
-        
-        repaint();
+        checkbox = new JCheckBox("Show Title", true);
+        checkbox.setSize(300, 100);
+        this.add(checkbox);
 	}
 	
-	public void update(Graphics g){
-		super.update(g);
+	public void redraw(){
 		Graphics2D gg = (Graphics2D) display.graphics.create();
-		paintAll(gg);
-		super.update(gg);
+		paintComponent(gg);
+		paintComponents(gg);
+		checkbox.paint(gg);
+		display.repaint();
 	}
 	
 	public void paint(Graphics2D g){
@@ -66,6 +70,7 @@ public class Sumerian extends JPanel implements ActionListener {
 		{
 			fb = new EInkFB("/dev/fb0");
 			mainDisplay = new EInkDisplay(fb);
+			
 		}
 		catch (IOException e)
 		{
@@ -81,6 +86,7 @@ public class Sumerian extends JPanel implements ActionListener {
 		
 		if (mainDisplay == null)
 		{
+			
 			mainDisplay = new SwingDisplay(600,800);
 			/*
 			SwingMouseInput smi = null;
@@ -94,6 +100,9 @@ public class Sumerian extends JPanel implements ActionListener {
 			ski.addEventListener(appMan);*/
 			
 		}
+
+		su = new Sumerian(mainDisplay);
+		su.redraw();
 	}
 
 	@Override

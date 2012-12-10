@@ -1,4 +1,4 @@
-package com.ramuller.sumerian.display.eink;
+
 
 /*
  *  Copyright (c) 2012 Michael Zucchi
