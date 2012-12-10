@@ -47,17 +47,18 @@ public class Sumerian extends JPanel implements ActionListener {
         checkbox.setSize(300, 50);
         this.add(checkbox,BorderLayout.NORTH);
         
-        try {
-        	URL start = getClass().getClassLoader().getResource("index.html");
-			html = new JEditorPane(start);
+        //try {
+        	//URL start = getClass().getClassLoader().getResource("index.html");
+			//html = new JEditorPane(start);
+        	html = new JEditorPane();
 			html.setSize(new Dimension(600,800));
 			html.setPreferredSize(new Dimension(600,800));
 			this.add(html,BorderLayout.CENTER);
 			
-		} catch (IOException e) {
+		/*} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
         
 	}
 	
@@ -87,22 +88,25 @@ public class Sumerian extends JPanel implements ActionListener {
 		EInkFB fb = null;
 		Display mainDisplay = null;
 		Sumerian su;
-		try
-		{
-			fb = new EInkFB("/dev/fb0");
-			mainDisplay = new EInkDisplay(fb);
-			
-		}
-		catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (UnsatisfiedLinkError e)
-		{
-			e.printStackTrace();
-//			System.out.println("Anscheinend kein EInk-Display vorhanden, deshalb Wechsel zu einem Swing-Display!");
-			
+		if(System.getProperty("user.home").length()<4){
+			try
+			{
+				fb = new EInkFB("/dev/fb0");
+				mainDisplay = new EInkDisplay(fb);
+				
+			}
+			catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+			catch (UnsatisfiedLinkError e)
+			{
+				e.printStackTrace();
+	//			System.out.println("Anscheinend kein EInk-Display vorhanden, deshalb Wechsel zu einem Swing-Display!");
+				
+			}
 		}
 		
 		if (mainDisplay == null)

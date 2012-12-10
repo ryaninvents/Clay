@@ -18,7 +18,6 @@ public abstract class Display
 		graphics = image.createGraphics();
 		graphics.setBackground(Color.white);
 		graphics.setColor(Color.white);
-		System.out.printf("construct Display width=%d height=%d", image.getWidth(), image.getHeight());
 		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 //		graphics.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);

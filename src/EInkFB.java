@@ -103,13 +103,10 @@ public class EInkFB
 	static native void close(ByteBuffer p);
 
 	static {
-    	System.out.println(System.getProperty("java.library.path"));
-//    	System.out.println(Configuration.getDirectory() + File.separator + "einkfb");
 		System.loadLibrary("einkfb");
 	}
 
 	public EInkFB(String name) throws IOException {
-    	System.out.println("construct EInkFB");
 		p = open(name);
 		if (p == null) {
 			throw new IOException("Unable to open framebuffer device");
@@ -181,7 +178,6 @@ public class EInkFB
 		buffer.rewind();
 
 		now = System.currentTimeMillis() - now;
-		System.out.printf(" update byte-byte region took %d.%03ds\n", now / 1000, now % 1000);
 	}
 
 	/**
@@ -219,7 +215,6 @@ public class EInkFB
 
 		update(p, UPDATE_MODE_PARTIAL, marker, l, t, r - l, b - t, flags);
 		now = System.currentTimeMillis() - now;
-		System.out.printf(" update partial took %d.%03ds\n", now / 1000, now % 1000);
 	}
 
 	public void update(Rectangle rect, int flags) {
@@ -243,7 +238,6 @@ public class EInkFB
 
 		update(p, UPDATE_MODE_FULL, marker, 0, 0, width, height, flags);
 		now = System.currentTimeMillis() - now;
-		System.out.printf(" update full took %d.%03ds\n", now / 1000, now % 1000);
 	}
 
 	public void update(int flags) {
