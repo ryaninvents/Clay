@@ -1,4 +1,4 @@
-package com.ramuller.sumerian.input;
+package com.ramuller.sumerian.event;
 
 public class SwipeEvent extends Event {
 

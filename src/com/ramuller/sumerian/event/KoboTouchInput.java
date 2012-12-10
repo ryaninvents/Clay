@@ -1,4 +1,4 @@
-package com.ramuller.sumerian.input;
+package com.ramuller.sumerian.event;
 
 /*
  *  Copyright (c) 2012 Michael Zucchi
