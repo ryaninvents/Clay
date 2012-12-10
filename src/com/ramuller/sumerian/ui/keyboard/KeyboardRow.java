@@ -48,7 +48,7 @@ public class KeyboardRow {
 	public void paint(Graphics2D g){
 		g.setFont(new Font("SansSerif",Font.PLAIN,(int)(height*0.8f)));
 		for(VirtualKey key : keys){
-			key.paint(g, y, height, false);
+			key.paint(g, y, height, Math.random()<0.1);
 		}
 	}
 

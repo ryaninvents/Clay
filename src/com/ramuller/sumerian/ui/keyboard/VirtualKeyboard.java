@@ -15,20 +15,24 @@ public class VirtualKeyboard {
 	public VirtualKeyboard(){
 		views = new Vector<KeyboardView>();
 		width = 600;
-		height = 200;
+		height = 250;
 		x = 0;
-		y = 600;
+		y = 800-height;
 		init();
 		reflow();
 	}
 	
 	public void init(){
 		KeyboardView view = new KeyboardView(this);
-		KeyboardRow row = new KeyboardRow("qwertyuiop",view);
+		KeyboardRow row;
+		
+		row = new KeyboardRow("qwertyuiop",view);
 		view.addRow(row);
 		row = new KeyboardRow("asdfghjkl;",view);
 		view.addRow(row);
 		row = new KeyboardRow("zxcvbnm",view);
+		view.addRow(row);
+		row = new KeyboardRow("# ^",view);
 		view.addRow(row);
 		addView(view);
 	}
@@ -51,7 +55,7 @@ public class VirtualKeyboard {
 	}
 	public void paint(Graphics2D g){
 		g.translate(x, y);
-		g.setColor(Color.gray);
+		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, width, height);
 		views.get(0).paint(g);
 		g.translate(-x, -y);

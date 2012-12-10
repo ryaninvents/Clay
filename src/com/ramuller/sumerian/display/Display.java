@@ -10,20 +10,33 @@ public abstract class Display
 {
 	BufferedImage image;
 	// for internal use
-	public Graphics2D graphics;
+	private Graphics2D gg;
 	
 	public Display(BufferedImage image) 
 	{
 		this.image = image;
-		graphics = image.createGraphics();
-		graphics.setBackground(Color.white);
-		graphics.setColor(Color.white);
-		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-//		graphics.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
-		graphics.setClip(0, 0, image.getWidth(), image.getHeight());
-		graphics.fillRect(0, 0, image.getWidth(), image.getHeight());
-		graphics.setColor(Color.black);
+		gg = image.createGraphics();
+		gg.setBackground(Color.white);
+		gg.setColor(Color.white);
+		gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		gg.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		gg.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
+		gg.setClip(0, 0, image.getWidth(), image.getHeight());
+		gg.fillRect(0, 0, image.getWidth(), image.getHeight());
+		gg.setColor(Color.black);
+	}
+	
+	public Graphics2D getGraphics(){
+		return (Graphics2D)gg.create();
+	}
+	
+	public void clear(){
+		gg.setColor(Color.black);
+		gg.fillRect(0, 0, image.getWidth(), image.getHeight());
+		repaint();
+		gg.setColor(Color.white);
+		gg.fillRect(0, 0, image.getWidth(), image.getHeight());
+		repaint();
 	}
 	
 	public abstract void repaint(Rectangle region);
@@ -31,6 +44,10 @@ public abstract class Display
 	public abstract void repaint(Rectangle region, boolean fastUpdate);
 	
 	public abstract void repaint();
+	
+	public void repaint(boolean fastUpdate){
+		repaint(new Rectangle(0,0,getWidth(),getHeight()),fastUpdate);
+	}
 	
 	public int getWidth()
 	{

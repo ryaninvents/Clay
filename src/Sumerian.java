@@ -2,6 +2,7 @@
  * 
  */
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -14,9 +15,9 @@ import javax.swing.JEditorPane;
 
 import com.ramuller.sumerian.display.Display;
 import com.ramuller.sumerian.display.SwingDisplay;
-import com.ramuller.sumerian.input.Event;
-import com.ramuller.sumerian.input.EventListener;
-import com.ramuller.sumerian.input.KoboTouchInput;
+import com.ramuller.sumerian.event.Event;
+import com.ramuller.sumerian.event.EventListener;
+import com.ramuller.sumerian.event.KoboTouchInput;
 import com.ramuller.sumerian.ui.keyboard.VirtualKeyboard;
 
 /**
@@ -31,13 +32,15 @@ public class Sumerian implements EventListener {
 	public Sumerian(Display display) {
 		this.display = display;
 		keyboard = new VirtualKeyboard();
+		
+		display.clear();
 
 		try {
 			URL start = getClass().getClassLoader().getResource("index.html");
 			html = new JEditorPane(start);
 
-			html.setSize(new Dimension(600, 800));
-			html.setPreferredSize(new Dimension(600, 800));
+			html.setSize(new Dimension(600, 400));
+			html.setPreferredSize(new Dimension(600, 400));
 			html.addPropertyChangeListener("page",
 					new PropertyChangeListener() {
 
@@ -54,13 +57,13 @@ public class Sumerian implements EventListener {
 	}
 
 	public void repaint() {
-		Graphics2D gg = (Graphics2D) display.graphics.create();
-		/*html.repaint();
+		Graphics2D gg = (Graphics2D) display.getGraphics();
+		html.repaint();
 		gg.setClip(0, 0, 600, 800);
 		gg.fillRect(0, 0, 600, 800);
-		html.paint(gg);*/
+		html.paint(gg);
 		keyboard.paint(gg);
-		display.repaint(new Rectangle(0,0,599,799),true);
+		display.repaint(false);
 	}
 
 	/**
@@ -101,7 +104,6 @@ public class Sumerian implements EventListener {
 		}
 
 		if (mainDisplay == null) {
-
 			mainDisplay = new SwingDisplay(600, 800);
 
 			su = new Sumerian(mainDisplay);

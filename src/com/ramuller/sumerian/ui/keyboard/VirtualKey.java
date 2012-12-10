@@ -4,16 +4,17 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 public class VirtualKey {
-	private int weight;
+	private float weight;
 	private int width;
 	private int x;
 	private static int margin=2;
-	private static int radius=3;
+	private static int radius=16;
 	private char label;
 	
 	public VirtualKey(char label){
 		this.label = label;
 		this.weight = 1;
+		if(label==' ') this.weight = 3;
 	}
 
 	public int getWidth() {
@@ -32,11 +33,11 @@ public class VirtualKey {
 		this.x = (int)x;
 	}
 
-	public int getWeight() {
+	public float getWeight() {
 		return weight;
 	}
 
-	public void setWeight(int weight) {
+	public void setWeight(float weight) {
 		this.weight = weight;
 	}
 	
@@ -44,6 +45,7 @@ public class VirtualKey {
 		g.setColor(invert?Color.BLACK:Color.WHITE);
 		g.fillRoundRect(x+margin, y+margin, width-2*margin, height-2*margin, radius, radius);
 		g.setColor(invert?Color.WHITE:Color.BLACK);
+		if(!invert)g.drawRoundRect(x+margin, y+margin, width-2*margin, height-2*margin, radius, radius);
 		g.drawString(""+label, x+3, y+(int)(height*0.8f));
 	}
 }
