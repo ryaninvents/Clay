@@ -1,5 +1,7 @@
 package com.ramuller.clay.event;
 
+import com.ramuller.clay.ui.Component;
+
 
 /*
  *  Copyright (c) 2012 Michael Zucchi
@@ -32,7 +34,7 @@ public class TouchEvent extends Event {
 	
 	public TouchEvent(TouchEvent me)
 	{
-		this(me.type, me.when, me.x, me.y);
+		this(me.getType(), me.getWhen(), me.x, me.y);
 	}
 	
 	public TouchEvent(EventType type, long when, int x, int y) 
@@ -43,7 +45,15 @@ public class TouchEvent extends Event {
 	}
 	
 	public String describe(){
-		return "Mouse " + x + "," + y;
+		return this.getType().name()+" " + x + "," + y;
+	}
+	
+	public TouchEvent dup(int x,int y){
+		return new TouchEvent(this.getType(),this.getWhen(),this.x-x,this.y-y);
+	}
+
+	public TouchEvent dup(Component c) {
+		return dup(c.getX(),c.getY());
 	}
 	
 //	public Point relativeTo(Gadget g) {

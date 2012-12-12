@@ -4,20 +4,22 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.Vector;
 
+import com.ramuller.clay.event.TouchEventListener;
+import com.ramuller.clay.ui.Component;
 
-public class VirtualKeyboard {
-	private int width;
-	private int height;
-	private int x,y;
+
+public class VirtualKeyboard extends Component implements TouchEventListener {
+	
+	private int currentView=0;
 	
 	private Vector<KeyboardView> views;
 	
 	public VirtualKeyboard(){
 		views = new Vector<KeyboardView>();
-		width = 600;
-		height = 250;
-		x = 0;
-		y = 800-height;
+		setWidth(600);
+		setHeight(250);
+		setX(0);
+		setY(800-getHeight());
 		init();
 		reflow();
 	}
@@ -41,37 +43,14 @@ public class VirtualKeyboard {
 		views.add(view);
 	}
 	
-	public int getWidth() {
-		return width;
-	}
-	public void setWidth(int width) {
-		this.width = width;
-	}
-	public int getHeight() {
-		return height;
-	}
-	public void setHeight(int height) {
-		this.height = height;
-	}
 	public void paint(Graphics2D g){
-		g.translate(x, y);
 		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, width, height);
-		views.get(0).paint(g);
-		g.translate(-x, -y);
-		
+		g.fillRect(0, 0, getWidth(), getHeight());
+		views.get(currentView).paint(g);
 	}
 	public void reflow(){
 		for(KeyboardView view : views){
 			view.reflow();
 		}
-	}
-
-	public int getX() {
-		return x;
-	}
-
-	public int getY() {
-		return y;
 	}
 }

@@ -7,21 +7,37 @@ package com.ramuller.clay.event;
 public class Event {
 
 //	public Display display;
-	public EventType type;
-	public long when;
+	private EventType type;
+	private long when;
 	
 	public Event(Event ev)
 	{
-		type = ev.type;
-		when = ev.when;
+		setType(ev.getType());
+		setWhen(ev.getWhen());
 	}
 	
 	public Event(EventType type, long when) {
-		this.type = type;
-		this.when = when;
+		this.setType(type);
+		this.setWhen(when);
 	}
 	
 	public String describe(){
-		return type.toString();
+		return getType().toString();
+	}
+
+	public EventType getType() {
+		return type;
+	}
+
+	public void setType(EventType type) {
+		this.type = type;
+	}
+
+	public long getWhen() {
+		return when;
+	}
+
+	public void setWhen(long when) {
+		this.when = when;
 	}
 }

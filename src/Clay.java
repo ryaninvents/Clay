@@ -61,7 +61,7 @@ public class Clay implements EventListener {
 		gg.setClip(0, 0, 600, 800);
 		gg.fillRect(0, 0, 600, 800);
 		html.paint(gg);
-		keyboard.paint(gg);
+		keyboard.update(gg);
 		display.repaint(false);
 	}
 
