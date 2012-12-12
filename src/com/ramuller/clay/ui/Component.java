@@ -50,7 +50,7 @@ public abstract class Component {
 	}
 
 	public abstract void paint(Graphics2D g);
-	public void onTouch(TouchEvent ev){}
+	public boolean onTouch(TouchEvent ev){return false;}
 	
 	public void event(Event ev) {
 		if(ev instanceof TouchEvent && inside((TouchEvent)ev)){

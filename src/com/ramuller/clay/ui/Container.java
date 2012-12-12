@@ -1,7 +1,7 @@
 package com.ramuller.clay.ui;
 
 import java.awt.Graphics2D;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import com.ramuller.clay.event.TouchEvent;
 /**
@@ -12,7 +12,7 @@ import com.ramuller.clay.event.TouchEvent;
  */
 public abstract class Container extends Component {
 	
-	private Vector<LayoutInfo> components;
+	private ArrayList<LayoutInfo> layouts;
 	/**
 	 * Each LayoutInfo item holds a component as well
 	 * as the information required to calculate the
@@ -43,7 +43,7 @@ public abstract class Container extends Component {
 	 * Paints this component and all subcomponents.
 	 */
 	public void paint(Graphics2D g) {
-		for(LayoutInfo li : components){
+		for(LayoutInfo li : layouts){
 			li.getComponent().update(g);
 		}
 	}
@@ -55,34 +55,39 @@ public abstract class Container extends Component {
 	 */
 	public abstract void reflow();
 	
-	protected Vector<LayoutInfo> getComponents(){
-		return components;
+	protected ArrayList<LayoutInfo> getLayoutList(){
+		return layouts;
+	}
+	
+	protected Component getComponent(int i){
+		return layouts.get(i).getComponent();
 	}
 	
 	public void addComponent(Component c){
-		components.add(new LayoutInfo(c));
+		layouts.add(new LayoutInfo(c));
 	}
 	
 	public void removeComponent(Component c){
 		LayoutInfo marked = null;
-		for(LayoutInfo li:components){
+		for(LayoutInfo li:layouts){
 			if(li.getComponent()==c){
 				marked = li;
 				break;
 			}
 		}
 		if(marked!=null)
-			components.remove(marked);
+			layouts.remove(marked);
 	}
 	
-	public void onTouch(TouchEvent ev){
+	public boolean onTouch(TouchEvent ev){
+		if(!isVisible()) return false;
 		Component c;
-		for(LayoutInfo li : components){
+		for(LayoutInfo li : layouts){
 			c = li.getComponent();
-			if(c.inside(ev)){
-				c.onTouch(ev.dup(c));
-			}
+			if(!c.isVisible()) continue;
+			if(c.onTouch(ev.dup(c))) return true;
 		}
+		return false;
 	}
 
 }
