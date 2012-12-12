@@ -3,12 +3,12 @@ package com.ramuller.clay.ui.containers;
 import com.ramuller.clay.ui.Component;
 import com.ramuller.clay.ui.Container;
 
-public class VerticalFlow extends Container {
+public class HorizontalFlow extends Container {
 
-	public VerticalFlow(Component parent) {
+	public HorizontalFlow(Component parent) {
 		super(parent);
 	}
-	private class VertLayoutInfo extends LayoutInfo{
+	private class HorizLayoutInfo extends LayoutInfo{
 		/**
 		 * Is this component's size fixed?
 		 */
@@ -18,12 +18,12 @@ public class VerticalFlow extends Container {
 		 */
 		private float weight;
 		
-		public VertLayoutInfo(Component c){
+		public HorizLayoutInfo(Component c){
 			super(c);
 			fixed = true;
 			weight=1;
 		}
-		public VertLayoutInfo(Component c,float w){
+		public HorizLayoutInfo(Component c,float w){
 			super(c);
 			fixed = false;
 			weight = w;
@@ -31,6 +31,7 @@ public class VerticalFlow extends Container {
 		
 		public boolean isFixed() {
 			return fixed;
+			// TODO Auto-generated constructor stub
 		}
 		public void setFixed(boolean fixed) {
 			this.fixed = fixed;
@@ -43,20 +44,22 @@ public class VerticalFlow extends Container {
 		}
 		
 	}
-	public void addComponent(Component c){
-		
-	}
 	@Override
 	public void reflow() {
-		int size = getHeight()/getLayoutList().size();
-		int y = 0;
+		int x = 0;
 		Component c;
+		float xw=0;
+
+		for(LayoutInfo li:getLayoutList()){
+			xw += ((HorizLayoutInfo)li).getWeight();
+		}
+		xw /= getLayoutList().size();
 		for(LayoutInfo li:getLayoutList()){
 			c = li.getComponent();
-			c.setHeight(size);
-			c.setY(y);
-			c.setX(0);
-			c.setWidth(getWidth());
+			c.setHeight(getHeight());
+			c.setY(0);
+			c.setX(x);
+			c.setWidth((int)(xw*(((HorizLayoutInfo)li).getWeight())));
 		}
 	}
 

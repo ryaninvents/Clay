@@ -1,5 +1,6 @@
 package com.ramuller.clay.ui.containers;
 
+import com.ramuller.clay.ui.Component;
 import com.ramuller.clay.ui.Container;
 /**
  * Implements an absolute layout, where component (x,y)
@@ -14,6 +15,10 @@ import com.ramuller.clay.ui.Container;
  * is to create a concrete class we can instantiate.
  */
 public class AbsoluteLayout extends Container {
+
+	public AbsoluteLayout(Component parent) {
+		super(parent);
+	}
 
 	public void reflow() {}
 

@@ -2,6 +2,7 @@ package com.ramuller.clay.ui.containers;
 
 import java.awt.Graphics2D;
 
+import com.ramuller.clay.event.TouchEvent;
 import com.ramuller.clay.ui.Component;
 import com.ramuller.clay.ui.Container;
 
@@ -12,6 +13,10 @@ import com.ramuller.clay.ui.Container;
  *
  */
 public class PagedLayout extends Container {
+	public PagedLayout(Component parent) {
+		super(parent);
+	}
+
 	/**
 	 * The index of the current page.
 	 */
@@ -45,6 +50,18 @@ public class PagedLayout extends Container {
 	public void addComponent(Component c,int page){
 		getLayoutList().set(page, new LayoutInfo(c));
 		reflow();
+	}
+	
+	public Component getVisibleComponent(){
+		return getComponent(currentPage);
+	}
+	
+	public boolean onTouch(TouchEvent ev){
+		if(!isVisible()) return false;
+		Component c = getVisibleComponent();
+		if(!c.isVisible()) return false;
+		if(c.onTouch(ev.dup(c))) return true;
+		return false;
 	}
 	
 	public void reflow() {

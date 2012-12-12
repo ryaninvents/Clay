@@ -10,6 +10,26 @@ public abstract class Component {
 	private int width;
 	private int height;
 	private int x,y;
+	private Component parent;
+	
+	private boolean fixedHoriz, fixedVert;
+
+	public Component(Component parent){
+		this.parent = parent;
+	}
+	
+	public boolean isFixedHoriz() {
+		return fixedHoriz;
+	}
+	public void setFixedHoriz(boolean fixedHoriz) {
+		this.fixedHoriz = fixedHoriz;
+	}
+	public boolean isFixedVert() {
+		return fixedVert;
+	}
+	public void setFixedVert(boolean fixedVert) {
+		this.fixedVert = fixedVert;
+	}
 
 	private boolean visible;
 	
@@ -38,7 +58,7 @@ public abstract class Component {
 		this.y = y;
 	}
 
-	public boolean inside(TouchEvent ev){
+	public boolean contains(TouchEvent ev){
 		return new Rectangle(x,y,width,height).contains(ev.x, ev.y);
 	}
 
@@ -53,7 +73,7 @@ public abstract class Component {
 	public boolean onTouch(TouchEvent ev){return false;}
 	
 	public void event(Event ev) {
-		if(ev instanceof TouchEvent && inside((TouchEvent)ev)){
+		if(ev instanceof TouchEvent && contains((TouchEvent)ev)){
 			this.onTouch((TouchEvent) ev);
 		}
 	}

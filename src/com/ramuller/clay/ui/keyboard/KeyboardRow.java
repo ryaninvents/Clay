@@ -3,12 +3,12 @@ package com.ramuller.clay.ui.keyboard;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.util.Vector;
+import java.util.ArrayList;
 
 import com.ramuller.clay.event.TouchEvent;
 
 public class KeyboardRow {
-	private Vector<VirtualKey> keys;
+	private ArrayList<VirtualKey> keys;
 	private int height;
 	private int y;
 	private KeyboardView parent;
@@ -17,7 +17,7 @@ public class KeyboardRow {
 		int i;
 		VirtualKey key;
 		this.parent = parent;
-		keys = new Vector<VirtualKey>();
+		keys = new ArrayList<VirtualKey>();
 		for(i=0;i<k.length();i++){
 			key = new VirtualKey(k.charAt(i),this);
 			keys.add(key);

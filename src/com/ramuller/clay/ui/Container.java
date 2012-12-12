@@ -12,7 +12,12 @@ import com.ramuller.clay.event.TouchEvent;
  */
 public abstract class Container extends Component {
 	
+	public Container(Component parent) {
+		super(parent);
+	}
+
 	private ArrayList<LayoutInfo> layouts;
+	
 	/**
 	 * Each LayoutInfo item holds a component as well
 	 * as the information required to calculate the

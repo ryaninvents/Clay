@@ -6,16 +6,17 @@ import java.util.Vector;
 
 import com.ramuller.clay.event.TouchEventListener;
 import com.ramuller.clay.ui.Component;
+import com.ramuller.clay.ui.containers.PagedLayout;
 
 
-public class VirtualKeyboard extends Component implements TouchEventListener {
+public class VirtualKeyboard extends PagedLayout implements TouchEventListener {
 	
 	private int currentView=0;
 	
 	private Vector<KeyboardView> views;
 	
-	public VirtualKeyboard(){
-		views = new Vector<KeyboardView>();
+	public VirtualKeyboard(Component parent){
+		super(parent);
 		setWidth(600);
 		setHeight(250);
 		setX(0);
