@@ -2,10 +2,8 @@
  * 
  */
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
@@ -18,6 +16,7 @@ import com.ramuller.clay.display.SwingDisplay;
 import com.ramuller.clay.event.Event;
 import com.ramuller.clay.event.EventListener;
 import com.ramuller.clay.event.KoboTouchInput;
+import com.ramuller.clay.event.swing.SwingMouseInput;
 import com.ramuller.clay.ui.keyboard.VirtualKeyboard;
 
 /**
@@ -107,6 +106,10 @@ public class Clay implements EventListener {
 			mainDisplay = new SwingDisplay(600, 800);
 
 			su = new Clay(mainDisplay);
+			
+			SwingMouseInput smi = new SwingMouseInput();
+			((SwingDisplay)mainDisplay).frame.addMouseListener(smi);
+			smi.addEventListener(su);
 			/*
 			 * SwingMouseInput smi = null; SwingKeyInput ski = null; smi = new
 			 * SwingMouseInput(); ski = new SwingKeyInput();

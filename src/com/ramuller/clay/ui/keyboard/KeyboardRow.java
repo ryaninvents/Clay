@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.Vector;
 
-import com.ramuller.clay.event.MouseEvent;
+import com.ramuller.clay.event.TouchEvent;
 
 public class KeyboardRow {
 	private Vector<VirtualKey> keys;
@@ -51,7 +51,7 @@ public class KeyboardRow {
 		}
 	}
 	
-	public boolean inside(MouseEvent e){
+	public boolean inside(TouchEvent e){
 		return new Rectangle(getX(),getAbsY(),parent.getWidth(),height).contains(e.x, e.y);
 	}
 	 

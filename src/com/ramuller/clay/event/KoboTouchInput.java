@@ -231,9 +231,9 @@ public class KoboTouchInput extends EventInput {
 					if (!dragged) 
 					{
 						if (portrait)
-							synthesised.add(new MouseEvent(synthEventType, time_s * 1000 + time_us / 1000, 600 - ypos, xpos));
+							synthesised.add(new TouchEvent(synthEventType, time_s * 1000 + time_us / 1000, 600 - ypos, xpos));
 						else
-							synthesised.add(new MouseEvent(synthEventType, time_s * 1000 + time_us / 1000, xpos, ypos));
+							synthesised.add(new TouchEvent(synthEventType, time_s * 1000 + time_us / 1000, xpos, ypos));
 					}
 				}
 			} 
@@ -278,10 +278,10 @@ public class KoboTouchInput extends EventInput {
 //			int ypos1 = ypos;
 //			ypos = xpos;
 //			xpos = 600 - ypos1;
-			lastEvent = new MouseEvent(eventType, time_s * 1000 + time_us / 1000, 600 - ypos, xpos);
+			lastEvent = new TouchEvent(eventType, time_s * 1000 + time_us / 1000, 600 - ypos, xpos);
 		}
 		else
-			lastEvent = new MouseEvent(eventType, time_s * 1000 + time_us / 1000, xpos, ypos);
+			lastEvent = new TouchEvent(eventType, time_s * 1000 + time_us / 1000, xpos, ypos);
 		return lastEvent;
 	}
 }

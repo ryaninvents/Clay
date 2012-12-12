@@ -26,16 +26,16 @@ package com.ramuller.clay.event;
  *
  * @author notzed
  */
-public class MouseEvent extends Event {
+public class TouchEvent extends Event {
 	public int x;
 	public int y;
 	
-	public MouseEvent(MouseEvent me)
+	public TouchEvent(TouchEvent me)
 	{
 		this(me.type, me.when, me.x, me.y);
 	}
 	
-	public MouseEvent(EventType type, long when, int x, int y) 
+	public TouchEvent(EventType type, long when, int x, int y) 
 	{
 		super(type, when);
 		this.x = x;

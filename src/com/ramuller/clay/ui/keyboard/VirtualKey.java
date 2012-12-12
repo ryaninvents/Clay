@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-import com.ramuller.clay.event.MouseEvent;
+import com.ramuller.clay.event.TouchEvent;
 
 public class VirtualKey {
 	private KeyboardRow parent;
@@ -22,7 +22,7 @@ public class VirtualKey {
 		if(label==' ') this.weight = 5;
 	}
 
-	public boolean inside(MouseEvent e){
+	public boolean inside(TouchEvent e){
 		return new Rectangle(parent.getX(),parent.getY(),getWidth(),parent.getHeight()).contains(e.x, e.y);
 	}
 	
