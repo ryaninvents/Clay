@@ -19,6 +19,14 @@ public class VirtualKey extends Component{
 	
 	ArrayList<KeyEventListener> listeners;
 	
+	public VirtualKey(char label, int keyCode, KeyboardRow parent){
+		super(parent);
+		this.label = label;
+		this.keyCode = keyCode;
+		listeners = new ArrayList<KeyEventListener>();
+		addKeyListener(parent);
+	}
+	
 	public boolean isInverted() {
 		return invert;
 	}

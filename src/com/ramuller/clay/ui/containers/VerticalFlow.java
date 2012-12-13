@@ -44,7 +44,11 @@ public class VerticalFlow extends Container {
 		
 	}
 	public void addComponent(Component c){
-		
+		getLayoutList().add(new VertLayoutInfo(c));
+		c.setParent(this);
+	}
+	public void addRow(Component c){
+		addComponent(c);
 	}
 	@Override
 	public void reflow() {
@@ -57,7 +61,9 @@ public class VerticalFlow extends Container {
 			c.setY(y);
 			c.setX(0);
 			c.setWidth(getWidth());
+			y+=size;
 		}
+		reflowChildren();
 	}
 
 }

@@ -2,67 +2,26 @@
  * 
  */
 
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.IOException;
-import java.net.URL;
-
-import javax.swing.JEditorPane;
 
 import com.ramuller.clay.display.Display;
 import com.ramuller.clay.display.SwingDisplay;
-import com.ramuller.clay.event.Event;
 import com.ramuller.clay.event.EventListener;
 import com.ramuller.clay.event.KoboTouchInput;
 import com.ramuller.clay.event.swing.SwingMouseInput;
-import com.ramuller.clay.ui.keyboard.VirtualKeyboard;
+import com.ramuller.clay.ui.Applet;
 
 /**
  * @author ryan
  * 
  */
-public class Clay implements EventListener {
-	Display display;
-	JEditorPane html;
-	VirtualKeyboard keyboard;
+public class Clay extends Applet implements EventListener {
 
 	public Clay(Display display) {
-		this.display = display;
-		keyboard = new VirtualKeyboard();
-		
+		super(display);
 		display.clear();
-
-		try {
-			URL start = getClass().getClassLoader().getResource("index.html");
-			html = new JEditorPane(start);
-
-			html.setSize(new Dimension(600, 400));
-			html.setPreferredSize(new Dimension(600, 400));
-			html.addPropertyChangeListener("page",
-					new PropertyChangeListener() {
-
-						public void propertyChange(PropertyChangeEvent arg0) {
-							Clay.this.repaint();
-						}
-
-					});
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public void repaint() {
-		Graphics2D gg = (Graphics2D) display.getGraphics();
-		html.repaint();
-		gg.setClip(0, 0, 600, 800);
-		gg.fillRect(0, 0, 600, 800);
-		html.paint(gg);
-		keyboard.update(gg);
-		display.repaint(false);
+		setKeyboardVisible(true);
+		repaint();
 	}
 
 	/**
@@ -121,11 +80,6 @@ public class Clay implements EventListener {
 
 		}
 
-	}
-
-	public void event(Event ev) {
-		html.setText(ev.describe());
-		repaint();
 	}
 
 }

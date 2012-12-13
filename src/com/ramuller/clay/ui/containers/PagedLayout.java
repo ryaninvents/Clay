@@ -56,14 +56,6 @@ public class PagedLayout extends Container {
 		return getComponent(currentPage);
 	}
 	
-	public boolean onTouch(TouchEvent ev){
-		if(!isVisible()) return false;
-		Component c = getVisibleComponent();
-		if(!c.isVisible()) return false;
-		if(c.onTouch(ev.dup(c))) return true;
-		return false;
-	}
-	
 	public void reflow() {
 		Component c;
 		for(LayoutInfo li:getLayoutList()){
@@ -73,6 +65,7 @@ public class PagedLayout extends Container {
 			c.setWidth(getWidth());
 			c.setHeight(getHeight());
 		}
+		reflowChildren();
 	}
 
 }

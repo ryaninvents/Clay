@@ -1,19 +1,17 @@
 package com.ramuller.clay.ui.keyboard;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.util.Vector;
+import java.util.ArrayList;
 
+import com.ramuller.clay.event.KeyEvent;
+import com.ramuller.clay.event.KeyEventListener;
 import com.ramuller.clay.event.TouchEventListener;
 import com.ramuller.clay.ui.Component;
 import com.ramuller.clay.ui.containers.PagedLayout;
 
 
-public class VirtualKeyboard extends PagedLayout implements TouchEventListener {
+public class VirtualKeyboard extends PagedLayout implements TouchEventListener, KeyEventListener {
 	
-	private int currentView=0;
-	
-	private Vector<KeyboardView> views;
+	ArrayList<KeyEventListener> listeners;
 	
 	public VirtualKeyboard(Component parent){
 		super(parent);
@@ -41,17 +39,13 @@ public class VirtualKeyboard extends PagedLayout implements TouchEventListener {
 	}
 	
 	public void addView(KeyboardView view){
-		views.add(view);
+		super.addComponent(view);
 	}
-	
-	public void paint(Graphics2D g){
-		g.setColor(Color.WHITE);
-		g.fillRect(0, 0, getWidth(), getHeight());
-		views.get(currentView).paint(g);
+
+	@Override
+	public void event(KeyEvent ev) {
+		System.out.println("KEY_"+ev.code);
 	}
-	public void reflow(){
-		for(KeyboardView view : views){
-			view.reflow();
-		}
-	}
+
+
 }

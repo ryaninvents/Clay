@@ -14,6 +14,7 @@ public abstract class Container extends Component {
 	
 	public Container(Component parent) {
 		super(parent);
+		layouts = new ArrayList<LayoutInfo>();
 	}
 
 	private ArrayList<LayoutInfo> layouts;
@@ -60,6 +61,16 @@ public abstract class Container extends Component {
 	 */
 	public abstract void reflow();
 	
+	public void reflowChildren(){
+		Component c;
+		for(LayoutInfo li:getLayoutList()){
+			c = li.getComponent();
+			if(c instanceof Container){
+				((Container)c).reflow();
+			}
+		}
+	}
+	
 	protected ArrayList<LayoutInfo> getLayoutList(){
 		return layouts;
 	}
@@ -70,6 +81,7 @@ public abstract class Container extends Component {
 	
 	public void addComponent(Component c){
 		layouts.add(new LayoutInfo(c));
+		c.setParent(this);
 	}
 	
 	public void removeComponent(Component c){
@@ -85,6 +97,7 @@ public abstract class Container extends Component {
 	}
 	
 	public boolean onTouch(TouchEvent ev){
+		System.out.println(this.getClass().getSimpleName()+"/"+this.hashCode()+" touch: "+ev.x+", "+ev.y+" relative to "+getX()+", "+getY());
 		if(!isVisible()) return false;
 		Component c;
 		for(LayoutInfo li : layouts){
