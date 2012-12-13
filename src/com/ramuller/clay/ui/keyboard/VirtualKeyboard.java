@@ -36,7 +36,7 @@ public class VirtualKeyboard extends PagedLayout implements TouchEventListener, 
 		
 		row = new KeyboardRow("qwertyuiop",view);
 		view.addRow(row);
-		row = new KeyboardRow("asdfghjkl;",view);
+		row = new KeyboardRow("asdfghjkl'",view);
 		view.addRow(row);
 		row = new KeyboardRow("zxcvbnm,.",view);
 		view.addRow(row);
@@ -48,7 +48,7 @@ public class VirtualKeyboard extends PagedLayout implements TouchEventListener, 
 		
 		row = new KeyboardRow("QWERTYUIOP",view);
 		view.addRow(row);
-		row = new KeyboardRow("ASDFGHJKL:",view);
+		row = new KeyboardRow("ASDFGHJKL\"",view);
 		view.addRow(row);
 		row = new KeyboardRow("ZXCVBNM!?",view);
 		view.addRow(row);
@@ -83,8 +83,14 @@ public class VirtualKeyboard extends PagedLayout implements TouchEventListener, 
 
 	@Override
 	public void event(KeyEvent ev) {
-		if(ev.code==KeyEvent.VK_SHIFT){
-			setCurrentPage(1-getCurrentPage());
+		switch(getCurrentPage()){
+			case 0:
+				if(ev.code==KeyEvent.VK_SHIFT){
+					setCurrentPage(1);
+				}
+				break;
+			case 1:
+				setCurrentPage(0);
 		}
 		for(KeyEventListener l:listeners){
 			l.event(ev);

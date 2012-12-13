@@ -3,6 +3,7 @@ package com.ramuller.clay.ui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Insets;
 
 import javax.swing.JTextArea;
 
@@ -22,11 +23,10 @@ public class TextDisplay extends Component implements KeyEventListener{
 		super(parent);
 		text = new JTextArea();
 		text.setSize(600,600);
-		text.setFont(new Font("Monospaced",Font.PLAIN,24));
+		text.setFont(new Font("SansSerif",Font.PLAIN,24));
+		text.setMargin(new Insets(10,10,10,10));
 		text.setWrapStyleWord(true);
 		text.setLineWrap(true);
-		text.setForeground(Color.white);
-		text.setBackground(Color.black);
 		str="";
 	}
 
@@ -48,13 +48,14 @@ public class TextDisplay extends Component implements KeyEventListener{
 	@Override
 	public void event(KeyEvent ev) {
 		if(ev.code==KeyEvent.VK_BACK_SPACE){
+			if(str.length()==0) return;
 			str = str.substring(0, str.length()-1);
-			text.setText(str);
+			text.setText(str+"|");
 			return;
 		}
 		if(ev.code==KeyEvent.VK_SHIFT) return;
 		str+=(char)ev.code;
-		text.setText(str);
+		text.setText(str+"|");
 	}
 
 }

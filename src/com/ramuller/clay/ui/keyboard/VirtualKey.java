@@ -54,8 +54,17 @@ public class VirtualKey extends Component{
 
 	public void paint(Graphics2D g){
 		int height = getHeight();
+		String x = ""+label;
 		paintFrame(g);
-		g.drawString(""+label, 3, (int)(height*0.8f));
+		switch(label){
+		case '<':
+			x = "\u2190";
+			break;
+		case '^':
+			x = "\u21E7";
+			break;
+		}
+		g.drawString(x, 10, (int)(height*0.8f));
 	}
 	public void paintFrame(Graphics2D g){
 		int height = getHeight();
