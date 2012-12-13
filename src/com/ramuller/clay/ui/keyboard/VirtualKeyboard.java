@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import com.ramuller.clay.event.Event;
 import com.ramuller.clay.event.KeyEvent;
 import com.ramuller.clay.event.KeyEventListener;
 import com.ramuller.clay.event.TouchEventListener;
@@ -48,10 +49,19 @@ public class VirtualKeyboard extends PagedLayout implements TouchEventListener, 
 	public void addView(KeyboardView view){
 		super.addComponent(view);
 	}
+	
+
+	public void event(Event ev){
+		if(ev instanceof KeyEvent){
+			this.event((KeyEvent)ev);
+		}
+		else super.event(ev);
+	}
+	
 
 	@Override
 	public void event(KeyEvent ev) {
-		System.out.println("KEY_"+ev.code);
+		System.out.print((char)ev.code);
 	}
 
 

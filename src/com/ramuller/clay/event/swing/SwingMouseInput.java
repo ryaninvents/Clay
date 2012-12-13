@@ -90,7 +90,7 @@ public class SwingMouseInput extends SwingEventInput implements MouseInputListen
 
 	@Override
 	public void mouseReleased(java.awt.event.MouseEvent e)
-	{
+	{/*
 		long timeup = System.currentTimeMillis();
 		event(new TouchEvent(EventType.MouseReleased, timeup , e.getX(), e.getY()));
 		end = new Point(e.getX(), e.getY());
@@ -112,7 +112,7 @@ public class SwingMouseInput extends SwingEventInput implements MouseInputListen
 			}
 		}	
 			
-		
+		*/
 	}
 
 	@Override
@@ -128,10 +128,10 @@ public class SwingMouseInput extends SwingEventInput implements MouseInputListen
 	@Override
 	public void mouseDragged(java.awt.event.MouseEvent e)
 	{
-		Logger.getLogger(getClass().getName()).log(Level.INFO, null);
+		/*Logger.getLogger(getClass().getName()).log(Level.INFO, null);
 		timedown = System.currentTimeMillis();
 		event(new TouchEvent(EventType.MouseDragged, timedown, e.getX(), e.getY()));
-		
+		*/
 	}
 
 	@Override
