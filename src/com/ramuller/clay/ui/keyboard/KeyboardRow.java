@@ -9,14 +9,23 @@ public class KeyboardRow extends HorizontalFlow implements KeyEventListener{
 	
 	public KeyboardRow(String k,KeyboardView parent){
 		super(parent);
-		int i;
+		int i,code;
 		VirtualKey key;
 		for(i=0;i<k.length();i++){
-			key = new VirtualKey(k.charAt(i),(int)k.charAt(i),this);
+			code = (int) k.charAt(i);
+			switch((char)code){
+			case '^':
+				code = KeyEvent.VK_SHIFT;
+				break;
+			case '<':
+				code = KeyEvent.VK_BACK_SPACE;
+				break;
+			}
+			key = new VirtualKey(k.charAt(i),code,this);
 			if(key.getLabel()==' '){
 				this.addComponent(key,3);
-			}
-			this.addComponent(key);
+			}else
+				this.addComponent(key);
 		}
 	}
 

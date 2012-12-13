@@ -90,7 +90,7 @@ public class SwingMouseInput extends SwingEventInput implements MouseInputListen
 
 	@Override
 	public void mouseReleased(java.awt.event.MouseEvent e)
-	{/*
+	{
 		long timeup = System.currentTimeMillis();
 		event(new TouchEvent(EventType.MouseReleased, timeup , e.getX(), e.getY()));
 		end = new Point(e.getX(), e.getY());
@@ -112,7 +112,7 @@ public class SwingMouseInput extends SwingEventInput implements MouseInputListen
 			}
 		}	
 			
-		*/
+		
 	}
 
 	@Override

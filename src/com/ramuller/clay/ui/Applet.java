@@ -4,11 +4,13 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import com.ramuller.clay.display.Display;
+import com.ramuller.clay.event.KeyEvent;
+import com.ramuller.clay.event.KeyEventListener;
 import com.ramuller.clay.ui.keyboard.VirtualKeyboard;
 
 
 
-public class Applet extends Container{
+public class Applet extends Container implements KeyEventListener{
 	private Display display;
 	
 	public static final int SCREEN_WIDTH = 600;
@@ -23,9 +25,12 @@ public class Applet extends Container{
 		setHeight(SCREEN_HEIGHT);
 		VirtualKeyboard vk = new VirtualKeyboard(this);
 		ArrayList<Container.LayoutInfo> list = getLayoutList();
-		Component c = new NullComponent(this);
+		TextDisplay c = new TextDisplay(this);
+		vk.addKeyEventListener(c);
+		vk.addKeyEventListener(this);
 		list.add(new LayoutInfo(c));
 		list.add(new LayoutInfo(vk));
+		reflow();
 	}
 
 	public void addComponent(Component c){
@@ -53,7 +58,12 @@ public class Applet extends Container{
 		gg.setClip(0, 0, 600, 800);
 		gg.fillRect(0, 0, 600, 800);
 		this.update(gg);
-		display.repaint(false);
+		display.repaint(true);
+	}
+
+	@Override
+	public void event(KeyEvent ev) {
+		repaint();
 	}
 	
 }

@@ -66,8 +66,7 @@ public class VirtualKey extends Component{
 	}
 
 	public boolean onTouch(TouchEvent ev){
-
-		if(this.contains(ev)){
+		if(this.contains(ev) && ev.getType()==EventType.MouseReleased){
 			KeyEvent ke = new KeyEvent(EventType.KeyTyped, System.currentTimeMillis(), keyCode);
 			for(KeyEventListener l:listeners){
 				l.event(ke);

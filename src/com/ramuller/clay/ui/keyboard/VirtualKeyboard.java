@@ -1,5 +1,6 @@
 package com.ramuller.clay.ui.keyboard;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class VirtualKeyboard extends PagedLayout implements TouchEventListener, 
 	
 	public VirtualKeyboard(Component parent){
 		super(parent);
+		listeners = new ArrayList<KeyEventListener>();
 		setWidth(600);
 		setHeight(250);
 		setX(0);
@@ -27,8 +29,10 @@ public class VirtualKeyboard extends PagedLayout implements TouchEventListener, 
 	}
 	
 	public void init(){
-		KeyboardView view = new KeyboardView(this);
+		KeyboardView view;
 		KeyboardRow row;
+		
+		view = new KeyboardView(this);
 		
 		row = new KeyboardRow("qwertyuiop",view);
 		view.addRow(row);
@@ -36,13 +40,27 @@ public class VirtualKeyboard extends PagedLayout implements TouchEventListener, 
 		view.addRow(row);
 		row = new KeyboardRow("zxcvbnm,.",view);
 		view.addRow(row);
-		row = new KeyboardRow("# ^",view);
+		row = new KeyboardRow("^ <",view);
+		view.addRow(row);
+		addView(view);
+		
+		view = new KeyboardView(this);
+		
+		row = new KeyboardRow("QWERTYUIOP",view);
+		view.addRow(row);
+		row = new KeyboardRow("ASDFGHJKL:",view);
+		view.addRow(row);
+		row = new KeyboardRow("ZXCVBNM!?",view);
+		view.addRow(row);
+		row = new KeyboardRow("^ <",view);
 		view.addRow(row);
 		addView(view);
 	}
 	
 	public void paint(Graphics2D g){
 		g.setFont(new Font("SansSerif",Font.PLAIN,getHeight()/5));
+		g.setColor(Color.gray);
+		g.fillRect(0,0,getWidth(),getHeight());
 		super.paint(g);
 	}
 	
@@ -50,8 +68,12 @@ public class VirtualKeyboard extends PagedLayout implements TouchEventListener, 
 		super.addComponent(view);
 	}
 	
+	public void addKeyEventListener(KeyEventListener l){
+		listeners.add(l);
+	}
 
 	public void event(Event ev){
+		
 		if(ev instanceof KeyEvent){
 			this.event((KeyEvent)ev);
 		}
@@ -61,7 +83,12 @@ public class VirtualKeyboard extends PagedLayout implements TouchEventListener, 
 
 	@Override
 	public void event(KeyEvent ev) {
-		System.out.print((char)ev.code);
+		if(ev.code==KeyEvent.VK_SHIFT){
+			setCurrentPage(1-getCurrentPage());
+		}
+		for(KeyEventListener l:listeners){
+			l.event(ev);
+		}
 	}
 
 

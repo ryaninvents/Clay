@@ -164,10 +164,8 @@ public class KoboTouchInput extends EventInput {
 					switch (code) 
 					{
 						case 258:
-							System.out.println("btn2 = " + value);
 							break;
 						case 330:
-							System.out.println("touch = " + value);
 							touch = value;
 							break;
 					}
@@ -194,7 +192,6 @@ public class KoboTouchInput extends EventInput {
 			xpos = xout;
 			ypos = yout;
 			press = pout;
-			System.out.println("touch count = " + touch);
 		}
 
 		EventType eventType = null;

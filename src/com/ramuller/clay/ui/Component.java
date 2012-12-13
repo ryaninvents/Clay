@@ -1,6 +1,5 @@
 package com.ramuller.clay.ui;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
@@ -12,6 +11,8 @@ public abstract class Component {
 	private int height;
 	private int x,y;
 	private Component parent;
+
+	private boolean visible=true;
 	
 	public void setParent(Component parent) {
 		this.parent = parent;
@@ -21,6 +22,7 @@ public abstract class Component {
 
 	public Component(Component parent){
 		this.parent = parent;
+		this.visible = true;
 	}
 	
 	public Component getParent() {
@@ -40,7 +42,6 @@ public abstract class Component {
 		this.fixedVert = fixedVert;
 	}
 
-	private boolean visible=true;
 	
 	public int getWidth() {
 		return width;

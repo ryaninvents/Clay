@@ -37,7 +37,7 @@ import java.nio.ByteOrder;
 public class EInkFB
 {
 
-	static final boolean debug = true;
+	static final boolean debug = false;
 	ByteBuffer p;
 	final int width;
 	final int height;
