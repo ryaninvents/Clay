@@ -12,6 +12,9 @@ public class KeyboardRow extends HorizontalFlow implements KeyEventListener{
 		VirtualKey key;
 		for(i=0;i<k.length();i++){
 			key = new VirtualKey(k.charAt(i),(int)k.charAt(i),this);
+			if(key.getLabel()==' '){
+				this.addComponent(key,3);
+			}
 			this.addComponent(key);
 		}
 	}
@@ -19,6 +22,5 @@ public class KeyboardRow extends HorizontalFlow implements KeyEventListener{
 	@Override
 	public void event(KeyEvent ev) {
 		getParent().event(ev);
-		System.out.println("Row detected key "+(char)ev.code);
 	}
 }

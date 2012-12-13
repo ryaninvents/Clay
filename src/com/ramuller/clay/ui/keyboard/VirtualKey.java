@@ -14,6 +14,14 @@ public class VirtualKey extends Component{
 	private static int margin=2;
 	private static int radius=16;
 	private char label;
+	public char getLabel() {
+		return label;
+	}
+
+	public void setLabel(char label) {
+		this.label = label;
+	}
+
 	private boolean invert=false;
 	private int keyCode=KeyEvent.VK_0;
 	
@@ -47,17 +55,18 @@ public class VirtualKey extends Component{
 	public void paint(Graphics2D g){
 		int height = getHeight();
 		paintFrame(g);
-		g.drawString(""+label, getX()+3, getY()+(int)(height*0.8f));
+		g.drawString(""+label, 3, (int)(height*0.8f));
 	}
 	public void paintFrame(Graphics2D g){
 		int height = getHeight();
 		g.setColor(invert?Color.BLACK:Color.WHITE);
-		g.fillRoundRect(getX()+margin, getY()+margin, getWidth()-2*margin, height-2*margin, radius, radius);
+		g.fillRoundRect(margin, margin, getWidth()-2*margin, height-2*margin, radius, radius);
 		g.setColor(invert?Color.WHITE:Color.BLACK);
-		if(!invert)g.drawRoundRect(getX()+margin, getY()+margin, getWidth()-2*margin, height-2*margin, radius, radius);
+		if(!invert)g.drawRoundRect(margin, margin, getWidth()-2*margin, height-2*margin, radius, radius);
 	}
 
 	public boolean onTouch(TouchEvent ev){
+
 		if(this.contains(ev)){
 			KeyEvent ke = new KeyEvent(EventType.KeyTyped, System.currentTimeMillis(), keyCode);
 			for(KeyEventListener l:listeners){

@@ -1,5 +1,7 @@
 package com.ramuller.clay.ui.keyboard;
 
+import java.awt.Font;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import com.ramuller.clay.event.KeyEvent;
@@ -36,6 +38,11 @@ public class VirtualKeyboard extends PagedLayout implements TouchEventListener, 
 		row = new KeyboardRow("# ^",view);
 		view.addRow(row);
 		addView(view);
+	}
+	
+	public void paint(Graphics2D g){
+		g.setFont(new Font("SansSerif",Font.PLAIN,getHeight()/5));
+		super.paint(g);
 	}
 	
 	public void addView(KeyboardView view){

@@ -55,6 +55,11 @@ public class PagedLayout extends Container {
 	public Component getVisibleComponent(){
 		return getComponent(currentPage);
 	}
+	/*
+	public boolean onTouch(TouchEvent ev){
+		if(!isVisible()||!containsDupped(ev)) return false;
+		return getVisibleComponent().onTouch(ev);
+	}*/
 	
 	public void reflow() {
 		Component c;

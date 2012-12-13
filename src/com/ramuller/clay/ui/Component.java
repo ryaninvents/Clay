@@ -71,6 +71,10 @@ public abstract class Component {
 		return new Rectangle(x,y,width,height).contains(ev.x, ev.y);
 	}
 
+	public boolean containsDupped(TouchEvent ev){
+		return new Rectangle(0,0,width-x,height-y).contains(ev.x, ev.y);
+	}
+
 	public boolean isVisible(){
 		return visible;
 	}

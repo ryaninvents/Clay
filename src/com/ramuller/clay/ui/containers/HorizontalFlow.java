@@ -49,6 +49,11 @@ public class HorizontalFlow extends Container {
 		getLayoutList().add(new HorizLayoutInfo(c));
 		c.setParent(this);
 	}
+	public void addComponent(Component c,float w){
+		getLayoutList().add(new HorizLayoutInfo(c,w));
+		c.setParent(this);
+	}
+	
 	@Override
 	public void reflow() {
 		float x = 0;
@@ -62,12 +67,12 @@ public class HorizontalFlow extends Container {
 		xw = getWidth()/xw;
 		for(LayoutInfo li:getLayoutList()){
 			c = li.getComponent();
-			c.setHeight(getHeight());
-			c.setY(0);
 			c.setX((int)x);
 			dx = (xw*(((HorizLayoutInfo)li).getWeight()));
 			c.setWidth((int) dx );
-			x+=dx/2;
+			c.setHeight(getHeight());
+			c.setY(0);
+			x+=dx;
 		}
 		reflowChildren();
 	}

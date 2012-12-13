@@ -67,7 +67,7 @@ public class Clay extends Applet implements EventListener {
 			su = new Clay(mainDisplay);
 			
 			SwingMouseInput smi = new SwingMouseInput();
-			((SwingDisplay)mainDisplay).frame.addMouseListener(smi);
+			((SwingDisplay)mainDisplay).icon.addMouseListener(smi);
 			smi.addEventListener(su);
 			/*
 			 * SwingMouseInput smi = null; SwingKeyInput ski = null; smi = new

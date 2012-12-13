@@ -97,13 +97,18 @@ public abstract class Container extends Component {
 	}
 	
 	public boolean onTouch(TouchEvent ev){
-		System.out.println(this.getClass().getSimpleName()+"/"+this.hashCode()+" touch: "+ev.x+", "+ev.y+" relative to "+getX()+", "+getY());
-		if(!isVisible()) return false;
+		
+		if(!isVisible()||!contains(ev)){
+			return false;
+		}
 		Component c;
+		ev = ev.dup(this);
 		for(LayoutInfo li : layouts){
 			c = li.getComponent();
 			if(!c.isVisible()) continue;
-			if(c.onTouch(ev.dup(c))) return true;
+			if(c.onTouch(ev)){
+				return true;
+			}
 		}
 		return false;
 	}

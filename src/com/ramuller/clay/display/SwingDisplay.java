@@ -12,7 +12,7 @@ public class SwingDisplay extends Display
 {
 
 	public JFrame frame = null;
-	JLabel icon;
+	public JLabel icon;
 	
 	public SwingDisplay(int width, int height)
 	{

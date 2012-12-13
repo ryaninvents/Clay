@@ -24,7 +24,7 @@ public abstract class SwingEventInput
 	}
 
 	void event(Event ev) {
-		Logger.getLogger(getClass().getName()).log(Level.INFO, String.valueOf(eventListeners.size()));
+		//Logger.getLogger(getClass().getName()).log(Level.INFO, String.valueOf(eventListeners.size()));
 		for (int i = 0; i < eventListeners.size(); i++) 
 		{
 			try 
@@ -33,7 +33,7 @@ public abstract class SwingEventInput
 			} 
 			catch (Throwable t) 
 			{
-				Logger.getLogger(getClass().getName()).log(Level.FINE, null, t);
+				Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, t);
 			}
 		}
 	}

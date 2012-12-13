@@ -41,7 +41,6 @@ public class SwingMouseInput extends SwingEventInput implements MouseInputListen
 		int dy = end.y - start.y;
 		if (dx != 0)
 			gradient = dy / dx;
-		System.out.printf("====== gradient: %.2f distance: %.2f acceleration: %.2f velocity: %.2f\n", gradient, distance, acceleration, velocity);
 		if (distance > swipeThreshold)
 		{
 			if (Math.abs(dx) < Math.abs(dy))
