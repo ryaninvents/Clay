@@ -53,7 +53,7 @@ public class TextDisplay extends Component implements KeyEventListener{
 			text.setText(str+"|");
 			return;
 		}
-		if(ev.code==KeyEvent.VK_SHIFT) return;
+		if(ev.code==KeyEvent.VK_SHIFT||ev.code==KeyEvent.VK_SHIFT2) return;
 		str+=(char)ev.code;
 		text.setText(str+"|");
 	}

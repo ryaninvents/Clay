@@ -14,11 +14,14 @@ public class KeyboardRow extends HorizontalFlow implements KeyEventListener{
 		for(i=0;i<k.length();i++){
 			code = (int) k.charAt(i);
 			switch((char)code){
-			case '^':
+			case '\u21e7':
 				code = KeyEvent.VK_SHIFT;
 				break;
-			case '<':
+			case '\u2190':
 				code = KeyEvent.VK_BACK_SPACE;
+				break;
+			case '\u2026':
+				code = KeyEvent.VK_SHIFT2;
 				break;
 			}
 			key = new VirtualKey(k.charAt(i),code,this);

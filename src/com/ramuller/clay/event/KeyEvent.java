@@ -75,6 +75,7 @@ public class KeyEvent extends Event {
     public static final int VK_Y              = 0x59;
     public static final int VK_Z              = 0x5A;
     public static final int VK_F1             = 0x80;
+    public static final int VK_SHIFT2         = 0x800;
 	
 	public KeyEvent(EventType type, long when, int code) 
 	{

@@ -38,9 +38,9 @@ public class VirtualKeyboard extends PagedLayout implements TouchEventListener, 
 		view.addRow(row);
 		row = new KeyboardRow("asdfghjkl'",view);
 		view.addRow(row);
-		row = new KeyboardRow("zxcvbnm,.",view);
+		row = new KeyboardRow("\u21e7zxcvbnm,.",view);
 		view.addRow(row);
-		row = new KeyboardRow("^ <",view);
+		row = new KeyboardRow("\u2026 \u2190",view);
 		view.addRow(row);
 		addView(view);
 		
@@ -50,9 +50,22 @@ public class VirtualKeyboard extends PagedLayout implements TouchEventListener, 
 		view.addRow(row);
 		row = new KeyboardRow("ASDFGHJKL\"",view);
 		view.addRow(row);
-		row = new KeyboardRow("ZXCVBNM!?",view);
+		row = new KeyboardRow("\u21e7ZXCVBNM!?",view);
 		view.addRow(row);
-		row = new KeyboardRow("^ <",view);
+		row = new KeyboardRow("\u2026 \u2190",view);
+		view.addRow(row);
+		addView(view);
+
+		
+		view = new KeyboardView(this);
+		
+		row = new KeyboardRow("1234567890",view);
+		view.addRow(row);
+		row = new KeyboardRow("[{}(=*)+]!",view);
+		view.addRow(row);
+		row = new KeyboardRow("\u21e7$~&%`#",view);
+		view.addRow(row);
+		row = new KeyboardRow("\u2026 \u2190",view);
 		view.addRow(row);
 		addView(view);
 	}
@@ -87,6 +100,9 @@ public class VirtualKeyboard extends PagedLayout implements TouchEventListener, 
 			case 0:
 				if(ev.code==KeyEvent.VK_SHIFT){
 					setCurrentPage(1);
+				}
+				if(ev.code==KeyEvent.VK_SHIFT2){
+					setCurrentPage(2);
 				}
 				break;
 			case 1:
