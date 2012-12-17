@@ -43,7 +43,6 @@ public class Clay extends App{
 		panel.add(button3,BorderLayout.EAST);
 		panel.add(button4,BorderLayout.WEST);
 		panel.add(button5,BorderLayout.CENTER);
-		panel.setSize(SCREEN_SIZE);
 		panel.getLayout().layoutContainer(panel);
 		repaint();
 	}

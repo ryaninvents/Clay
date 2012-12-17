@@ -19,7 +19,7 @@ package com.mypapyri.clay.event;
  *  along with ReaderZ.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import java.awt.Event;
+import java.awt.AWTEvent;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -39,7 +39,7 @@ import java.util.logging.Logger;
  * 
  * @author notzed
  */
-public abstract class EventInput extends Thread {
+public abstract class EventInput<XEvent extends AWTEvent,XListener extends EventListener> extends Thread {
 	// fields from linux/input.h:input_event
 
 	long time_s;
@@ -51,18 +51,18 @@ public abstract class EventInput extends Thread {
 	private ReadableByteChannel event;
 	private ByteBuffer data = ByteBuffer.allocate(16).order(ByteOrder.nativeOrder());
 //	protected Display source;
-	private ArrayList<EventListener> eventListeners = new ArrayList<EventListener>();
+	private ArrayList<XListener> eventListeners = new ArrayList<XListener>();
 
 	public EventInput(String path) throws IOException {
 		event = Files.newByteChannel(Paths.get(path), EnumSet.of(StandardOpenOption.READ));
 //		this.source = source;
 	}
 
-	public void addEventListener(EventListener el) {
+	public void addEventListener(XListener el) {
 		eventListeners.add(el);
 	}
 
-	public void removeEventListener(EventListener el) {
+	public void removeEventListener(XListener el) {
 		eventListeners.remove(el);
 	}
 /*
@@ -75,7 +75,7 @@ public abstract class EventInput extends Thread {
 			}
 		}
 	}*/
-	public abstract void fireEvent(Event ev);
+	public abstract void fireEvent(int category, XEvent ev);
 
 	/**
 	 * Read next event part into fields, blocking if necessary.
@@ -109,17 +109,17 @@ public abstract class EventInput extends Thread {
 		return type;
 	}
 
-	abstract public Event readEvent() throws IOException;
+	protected ArrayList<XListener> getListeners(){
+		return eventListeners;
+	}
+	
+	abstract public void readEvent() throws IOException;
 
 	@Override
 	public void run() {
 		try {
 			while (true) {
-				Event ev = readEvent();
-
-				if (ev != null) {
-					fireEvent(ev);
-				}
+				readEvent();
 			}
 		} catch (IOException ex) {
 			Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
