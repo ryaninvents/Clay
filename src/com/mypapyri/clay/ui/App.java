@@ -1,17 +1,17 @@
 package com.mypapyri.clay.ui;
 
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+import javax.swing.JPanel;
+
 import com.ramuller.clay.display.Display;
 
-public class App extends Container {
+public class App extends JPanel {
 	private static final long serialVersionUID = -669809789921280413L;
 	private Display display;
 	
-
 	public static final int SCREEN_WIDTH = 600;
 	public static final int SCREEN_HEIGHT = 800;
 	public static final Dimension SCREEN_SIZE = new Dimension(SCREEN_WIDTH,SCREEN_HEIGHT);

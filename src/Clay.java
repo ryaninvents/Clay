@@ -10,23 +10,24 @@ import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import com.mypapyri.clay.ui.App;
 import com.ramuller.clay.display.Display;
 import com.ramuller.clay.display.SwingDisplay;
+import com.ramuller.clay.event.Event;
 import com.ramuller.clay.event.EventListener;
 import com.ramuller.clay.event.KoboTouchInput;
 import com.ramuller.clay.event.swing.SwingMouseInput;
-import com.ramuller.clay.ui.Applet;
 
 /**
  * @author ryan
  * 
  */
-public class Clay extends Applet implements EventListener {
+public class Clay extends App{
 	JPanel panel;
 	public Clay(Display display) {
 		super(display);
 		display.clear();
-		setKeyboardVisible(true);
+		//setKeyboardVisible(true);
 		panel = new JPanel();
 		panel.setBackground(Color.red);
 		panel.setLayout(new BorderLayout());
@@ -36,6 +37,7 @@ public class Clay extends Applet implements EventListener {
 		button3=new JButton("East");
 		button4=new JButton("West");
 		button5=new JButton("Center");
+
 		panel.add(button1,BorderLayout.NORTH);
 		panel.add(button2,BorderLayout.SOUTH);
 		panel.add(button3,BorderLayout.EAST);
@@ -91,10 +93,14 @@ public class Clay extends Applet implements EventListener {
 			mainDisplay = new SwingDisplay(600, 800);
 
 			su = new Clay(mainDisplay);
+
 			
 			SwingMouseInput smi = new SwingMouseInput();
 			((SwingDisplay)mainDisplay).icon.addMouseListener(smi);
 			smi.addEventListener(su);
+			
+
+			su.repaint();
 			/*
 			 * SwingMouseInput smi = null; SwingKeyInput ski = null; smi = new
 			 * SwingMouseInput(); ski = new SwingKeyInput();
