@@ -35,17 +35,15 @@ import com.ramuller.clay.ui.Component;
 public class TouchEvent extends MouseEvent {
 	private static final long serialVersionUID = 2425002140064710527L;
 	
-	public int x;
-	public int y;
+	public static final int DRAG = 1<<8;
+	public static final int MOUSE_LONG_CLICKED = 1<<9;
 	
-	public TouchEvent(long when, int x, int y) 
+	public TouchEvent(long when, int x, int y, int type) 
 	{
-		super(null,0,when,0,x,y,1,false);
-		this.x = x;
-		this.y = y;
+		super(null,0,when,0,x,y,0,false);
 	}
 	
 	public TouchEvent toPortrait(){
-		return new TouchEvent(this.getWhen(),ClaySystemSettings.getScreenWidth()-this.y,this.x);
+		return new TouchEvent(this.getWhen(),ClaySystemSettings.getScreenWidth()-this.getY(),this.getX(), this.getModifiers());
 	}
 }

@@ -52,10 +52,14 @@ public abstract class EventInput<XEvent extends AWTEvent,XListener extends Event
 	private ByteBuffer data = ByteBuffer.allocate(16).order(ByteOrder.nativeOrder());
 //	protected Display source;
 	private ArrayList<XListener> eventListeners = new ArrayList<XListener>();
+	
+	public EventInput(){
 
-	public EventInput(String path) throws IOException {
-		event = Files.newByteChannel(Paths.get(path), EnumSet.of(StandardOpenOption.READ));
-//		this.source = source;
+	}
+	
+	protected void setReadableByteChannel(String path) throws IOException{
+		
+		event=Files.newByteChannel(Paths.get(path), EnumSet.of(StandardOpenOption.READ));
 	}
 
 	public void addEventListener(XListener el) {
@@ -75,7 +79,7 @@ public abstract class EventInput<XEvent extends AWTEvent,XListener extends Event
 			}
 		}
 	}*/
-	public abstract void fireEvent(int category, XEvent ev);
+	public abstract void fireEvent(XEvent ev);
 
 	/**
 	 * Read next event part into fields, blocking if necessary.

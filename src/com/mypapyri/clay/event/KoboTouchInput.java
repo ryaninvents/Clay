@@ -18,11 +18,6 @@ package com.mypapyri.clay.event;
  *  You should have received a copy of the GNU General Public License
  *  along with ReaderZ.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-//import au.notzed.gadgetz.Display;
-//import au.notzed.gadgetz.AWTEvent;
-//import au.notzed.gadgetz.AWTEventType;
-//import au.notzed.gadgetz.MouseEvent;
 import java.awt.AWTEvent;
 import java.awt.Point;
 import java.io.IOException;
@@ -37,6 +32,7 @@ import com.mypapyri.clay.ClaySystemSettings;
  * Read the touch input on the kobo.
  * 
  * @author notzed
+ * @author ryanthejuggler
  */
 public class KoboTouchInput extends EventInput<TouchEvent, TouchEventListener> {
 
@@ -66,19 +62,14 @@ public class KoboTouchInput extends EventInput<TouchEvent, TouchEventListener> {
 	AWTEvent lastAWTEvent;
 
 	public KoboTouchInput(String path) throws IOException {
-		super(path);
+		super();
+		setReadableByteChannel(path);
 	}
 
 	Point start = null;
 	long startTime = 0;
 	Point end = null;
 	long releaseTime = 0;
-
-	public static final int TOUCH_DOWN = 1;
-	public static final int TOUCH_UP = 2;
-	public static final int TOUCH_DRAG = 3;
-	public static final int TAP = 4;
-	public static final int LONG_TAP = 5;
 
 	public void readEvent() throws IOException {
 		boolean sync = false;
@@ -128,8 +119,8 @@ public class KoboTouchInput extends EventInput<TouchEvent, TouchEventListener> {
 
 				long timeup = time_s * 1000 + time_us / 1000;
 
-				fireEvent(TOUCH_UP, new TouchEvent(System.currentTimeMillis(),
-						xout, yout));
+				fireEvent(new TouchEvent(System.currentTimeMillis(),
+						xout, yout, TouchEvent.MOUSE_RELEASED));
 
 				mouse1 = false;
 
@@ -139,12 +130,12 @@ public class KoboTouchInput extends EventInput<TouchEvent, TouchEventListener> {
 
 				if (timeup - timedown > ClaySystemSettings
 						.getLongClickThreshold())
-					fireEvent(LONG_TAP,
+					fireEvent(
 							new TouchEvent(System.currentTimeMillis(), xout,
-									yout));
+									yout, TouchEvent.MOUSE_LONG_CLICKED));
 				else
-					fireEvent(TAP, new TouchEvent(System.currentTimeMillis(),
-							xout, yout));
+					fireEvent(new TouchEvent(System.currentTimeMillis(),
+							xout, yout,TouchEvent.MOUSE_CLICKED));
 
 			}
 			// else if (dragged)
@@ -167,33 +158,35 @@ public class KoboTouchInput extends EventInput<TouchEvent, TouchEventListener> {
 				ydown = ypos;
 				timedown = time_s * 1000 + time_us / 1000;
 				startTime = timedown;
-				fireEvent(TOUCH_DOWN,new TouchEvent(System.currentTimeMillis(),xpos,ypos));
+				fireEvent(new TouchEvent(System.currentTimeMillis(),xpos,ypos,TouchEvent.MOUSE_PRESSED));
 			}
 		}
 	}
 
 	@Override
-	public void fireEvent(int slot, TouchEvent ev) {
+	public void fireEvent(TouchEvent ev) {
 		if (ClaySystemSettings.isPortrait())
 			ev = ev.toPortrait();
+		
+		int type = ev.getModifiers();
 		ArrayList<TouchEventListener> listeners = getListeners();
 
 		for (TouchEventListener l : listeners) {
 
-			switch (slot) {
-			case TAP:
+			switch (type) {
+			case TouchEvent.MOUSE_CLICKED:
 				l.onTap(ev);
 				break;
-			case LONG_TAP:
+			case TouchEvent.MOUSE_LONG_CLICKED:
 				l.onLongTap(ev);
 				break;
-			case TOUCH_DOWN:
+			case TouchEvent.MOUSE_PRESSED:
 				l.onTouchDown(ev);
 				break;
-			case TOUCH_UP:
+			case TouchEvent.MOUSE_RELEASED:
 				l.onTouchUp(ev);
 				break;
-			case TOUCH_DRAG:
+			case TouchEvent.MOUSE_DRAGGED:
 				l.onDrag(ev);
 				break;
 			}
