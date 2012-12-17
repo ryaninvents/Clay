@@ -18,6 +18,8 @@ public class SwingDisplay extends Display
 	{
 		super(new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY));
 		frame = new JFrame("Kobo Touch");
+		frame.setUndecorated(true);
+		frame.setResizable(false);
 		frame.getContentPane().setLayout(new BorderLayout());
 		icon = new JLabel(new ImageIcon(image));
 		frame.getContentPane().add(icon , BorderLayout.CENTER);

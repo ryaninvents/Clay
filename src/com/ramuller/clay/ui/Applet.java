@@ -1,5 +1,6 @@
 package com.ramuller.clay.ui;
 
+import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ public class Applet extends Container implements KeyEventListener{
 	
 	public static final int SCREEN_WIDTH = 600;
 	public static final int SCREEN_HEIGHT = 800;
+	public static final Dimension SCREEN_SIZE = new Dimension(SCREEN_WIDTH,SCREEN_HEIGHT);
 	
 	public Applet(Display d){
 		super(null);

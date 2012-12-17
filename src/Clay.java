@@ -2,7 +2,13 @@
  * 
  */
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.io.IOException;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 import com.ramuller.clay.display.Display;
 import com.ramuller.clay.display.SwingDisplay;
@@ -16,13 +22,33 @@ import com.ramuller.clay.ui.Applet;
  * 
  */
 public class Clay extends Applet implements EventListener {
-
+	JPanel panel;
 	public Clay(Display display) {
 		super(display);
 		display.clear();
 		setKeyboardVisible(true);
+		panel = new JPanel();
+		panel.setBackground(Color.red);
+		panel.setLayout(new BorderLayout());
+		JButton button1,button2,button3,button4,button5;
+		button1=new JButton("North");
+		button2=new JButton("South");
+		button3=new JButton("East");
+		button4=new JButton("West");
+		button5=new JButton("Center");
+		panel.add(button1,BorderLayout.NORTH);
+		panel.add(button2,BorderLayout.SOUTH);
+		panel.add(button3,BorderLayout.EAST);
+		panel.add(button4,BorderLayout.WEST);
+		panel.add(button5,BorderLayout.CENTER);
+		panel.setSize(SCREEN_SIZE);
+		panel.getLayout().layoutContainer(panel);
 		repaint();
 	}
+	//*
+	public void paint(Graphics2D g){
+		panel.paint(g);
+	}//*/
 
 	/**
 	 * @param args
