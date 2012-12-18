@@ -62,11 +62,11 @@ public abstract class EventInput<XEvent extends AWTEvent,XListener extends Event
 		event=Files.newByteChannel(Paths.get(path), EnumSet.of(StandardOpenOption.READ));
 	}
 
-	public void addEventListener(XListener el) {
+	public void addListener(XListener el) {
 		eventListeners.add(el);
 	}
 
-	public void removeEventListener(XListener el) {
+	public void removeListener(XListener el) {
 		eventListeners.remove(el);
 	}
 /*

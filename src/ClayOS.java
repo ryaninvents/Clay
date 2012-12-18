@@ -1,10 +1,14 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import com.mypapyri.clay.ClaySystem;
 import com.mypapyri.clay.event.KoboTouchInput;
 import com.mypapyri.clay.event.SwingMouseInput;
 import com.mypapyri.clay.ui.App;
@@ -12,13 +16,14 @@ import com.ramuller.clay.display.Display;
 import com.ramuller.clay.display.SwingDisplay;
 
 
-public class ClayOS extends App{
+
+public class ClayOS extends App implements ActionListener{
 
 	private static final long serialVersionUID = 3343633470257570334L;
 	
 
-	public ClayOS(Display d) {
-		super(d);
+	public ClayOS() {
+		super();
 		JPanel panel = this;
 		panel.setBackground(Color.red);
 		panel.setLayout(new BorderLayout());
@@ -28,6 +33,12 @@ public class ClayOS extends App{
 		button3=new JButton("East");
 		button4=new JButton("West");
 		button5=new JButton("Center");
+
+		button1.addActionListener(this);
+		button2.addActionListener(this);
+		button3.addActionListener(this);
+		button4.addActionListener(this);
+		button5.addActionListener(this);
 
 		panel.add(button1,BorderLayout.NORTH);
 		panel.add(button2,BorderLayout.SOUTH);
@@ -42,12 +53,11 @@ public class ClayOS extends App{
 
 	public static void main(String[] args) {
 		EInkFB fb = null;
-		Display mainDisplay = null;
-		ClayOS su;
+		Display display = null;
 		if (System.getProperty("user.home").length() < 4) {
 			try {
 				fb = new EInkFB("/dev/fb0");
-				mainDisplay = new EInkDisplay(fb);
+				display = new EInkDisplay(fb);
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -60,7 +70,9 @@ public class ClayOS extends App{
 
 			}
 
-			su = new ClayOS(mainDisplay);
+			App.setDisplay(display);
+			ClayOS su = new ClayOS();
+			ClaySystem.setActiveApp(su);
 
 			KoboTouchInput kti = null;
 			try {
@@ -69,23 +81,44 @@ public class ClayOS extends App{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			kti.addEventListener(su);
+			kti.addListener(su);
 			kti.start();
+			
+			try{
+				while(true){
+					su.repaint();
+					Thread.sleep(1000);
+				}
+			}catch(Exception e){
+				
+			}
 
 		}
 
-		if (mainDisplay == null) {
-			mainDisplay = new SwingDisplay(600, 800);
+		if (display == null) {
+			display = new SwingDisplay(600, 800);
 
-			su = new ClayOS(mainDisplay);
+			while(display==null){
+				System.out.print('.');
+			}
 
+			App.setDisplay(display);
+			ClayOS su = new ClayOS();
 			
+			while(su.getDisplay()==null){
+				System.out.print('.');
+				su.repaint();
+			}
+
+			Graphics2D g = display.getGraphics();
+			g.fillOval(0, 0, 100, 100);
+			su.update(g);
+			display.repaint();
+
 			SwingMouseInput smi = new SwingMouseInput();
-			((SwingDisplay)mainDisplay).icon.addMouseListener(smi);
-			smi.addEventListener(su);
+			((SwingDisplay)display).icon.addMouseListener(smi);
+			smi.addListener(su);
 			
-
-			su.repaint();
 			/*
 			 * SwingMouseInput smi = null; SwingKeyInput ski = null; smi = new
 			 * SwingMouseInput(); ski = new SwingKeyInput();
@@ -97,5 +130,11 @@ public class ClayOS extends App{
 
 		}
 
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.out.println(((JButton)e.getSource()).getText());
 	}
 }

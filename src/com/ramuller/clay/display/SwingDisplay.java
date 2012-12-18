@@ -23,7 +23,7 @@ public class SwingDisplay extends Display
 		frame.getContentPane().setLayout(new BorderLayout());
 		icon = new JLabel(new ImageIcon(image));
 		frame.getContentPane().add(icon , BorderLayout.CENTER);
-
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
 		frame.setVisible(true);
@@ -34,18 +34,16 @@ public class SwingDisplay extends Display
 	public void repaint(Rectangle region)
 	{
 		icon.repaint(region.x, region.y, region.width, region.height);
-
 	}
 
 	public void repaint()
 	{
 		icon.repaint();
-
 	}
 
 	@Override
 	public void repaint(Rectangle region, boolean fastUpdate) {
-		icon.repaint();
+		repaint(region);
 		
 	}
 

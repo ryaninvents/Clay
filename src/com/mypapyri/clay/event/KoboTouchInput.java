@@ -20,13 +20,14 @@ package com.mypapyri.clay.event;
  */
 import java.awt.AWTEvent;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 
-import com.mypapyri.clay.ClaySystemSettings;
+import com.mypapyri.clay.ClaySystem;
 
 /**
  * Read the touch input on the kobo.
@@ -128,7 +129,7 @@ public class KoboTouchInput extends EventInput<TouchEvent, TouchEventListener> {
 				releaseTime = timeup;
 				// not dealing with swipes right now
 
-				if (timeup - timedown > ClaySystemSettings
+				if (timeup - timedown > ClaySystem
 						.getLongClickThreshold())
 					fireEvent(
 							new TouchEvent(System.currentTimeMillis(), xout,
@@ -162,13 +163,13 @@ public class KoboTouchInput extends EventInput<TouchEvent, TouchEventListener> {
 			}
 		}
 	}
-
+	
 	@Override
 	public void fireEvent(TouchEvent ev) {
-		if (ClaySystemSettings.isPortrait())
+		if (ClaySystem.isPortrait())
 			ev = ev.toPortrait();
 		
-		int type = ev.getModifiers();
+		int type = ev.getType();
 		ArrayList<TouchEventListener> listeners = getListeners();
 
 		for (TouchEventListener l : listeners) {

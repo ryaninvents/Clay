@@ -2,7 +2,7 @@ package com.mypapyri.clay.event;
 
 import java.awt.event.MouseEvent;
 
-import com.mypapyri.clay.ClaySystemSettings;
+import com.mypapyri.clay.ClaySystem;
 import com.ramuller.clay.event.EventType;
 import com.ramuller.clay.ui.Component;
 
@@ -38,12 +38,19 @@ public class TouchEvent extends MouseEvent {
 	public static final int DRAG = 1<<8;
 	public static final int MOUSE_LONG_CLICKED = 1<<9;
 	
+	private int type;
+	
 	public TouchEvent(long when, int x, int y, int type) 
 	{
-		super(null,0,when,0,x,y,0,false);
+		super(ClaySystem.getActiveApp(),type,when,0,x,y,x,y,1,false,BUTTON1);
+		this.type = type;
 	}
 	
 	public TouchEvent toPortrait(){
-		return new TouchEvent(this.getWhen(),ClaySystemSettings.getScreenWidth()-this.getY(),this.getX(), this.getModifiers());
+		return new TouchEvent(this.getWhen(),ClaySystem.getScreenWidth()-this.getY(),this.getX(), this.getType());
+	}
+
+	public int getType() {
+		return type;
 	}
 }

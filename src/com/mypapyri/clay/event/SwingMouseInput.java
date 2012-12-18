@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.event.MouseInputListener;
 
-import com.mypapyri.clay.ClaySystemSettings;
+import com.mypapyri.clay.ClaySystem;
 
 
 public class SwingMouseInput extends EventInput<TouchEvent,TouchEventListener> implements MouseInputListener
@@ -35,7 +35,7 @@ public class SwingMouseInput extends EventInput<TouchEvent,TouchEventListener> i
 		timedown = System.currentTimeMillis();
 		start = new Point(e.getX(), e.getY());
 		startTime = timedown;
-		fireEvent(TouchEvent.MOUSE_PRESSED, new TouchEvent(timedown, e.getX(), e.getY(),TouchEvent.MOUSE_PRESSED));
+		fireEvent(new TouchEvent(timedown, e.getX(), e.getY(),TouchEvent.MOUSE_PRESSED));
 		
 	}
 	
@@ -44,17 +44,17 @@ public class SwingMouseInput extends EventInput<TouchEvent,TouchEventListener> i
 	public void mouseReleased(java.awt.event.MouseEvent e)
 	{
 		long timeup = System.currentTimeMillis();
-		fireEvent(TouchEvent.MOUSE_RELEASED, new TouchEvent(timeup , e.getX(), e.getY(),TouchEvent.MOUSE_RELEASED));
+		fireEvent(new TouchEvent(timeup , e.getX(), e.getY(),TouchEvent.MOUSE_RELEASED));
 		end = new Point(e.getX(), e.getY());
 		releaseTime = timeup;
-		if (timeup - timedown > ClaySystemSettings.getLongClickThreshold())
+		if (timeup - timedown > ClaySystem.getLongClickThreshold())
 		{
-			fireEvent(TouchEvent.MOUSE_LONG_CLICKED, new TouchEvent(timeup , e.getX(), e.getY(),TouchEvent.MOUSE_LONG_CLICKED));
+			fireEvent(new TouchEvent(timeup , e.getX(), e.getY(),TouchEvent.MOUSE_LONG_CLICKED));
 			
 		}
 		else
 		{
-			fireEvent(TouchEvent.MOUSE_CLICKED, new TouchEvent(timeup , e.getX(), e.getY(),TouchEvent.MOUSE_CLICKED));
+			fireEvent(new TouchEvent(timeup , e.getX(), e.getY(),TouchEvent.MOUSE_CLICKED));
 		}
 			
 		
@@ -97,7 +97,7 @@ public class SwingMouseInput extends EventInput<TouchEvent,TouchEventListener> i
 
 	@Override
 	public void fireEvent(TouchEvent ev) {
-		if (ClaySystemSettings.isPortrait())
+		if (ClaySystem.isPortrait())
 			ev = ev.toPortrait();
 		
 		int type = ev.getModifiers();
