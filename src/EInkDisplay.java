@@ -2,6 +2,7 @@
 
 import java.awt.Rectangle;
 
+import com.mypapyri.clay.ClaySystem;
 import com.ramuller.clay.display.Display;
 
 
@@ -19,7 +20,8 @@ public class EInkDisplay extends Display
 	public void repaint(Rectangle region)
 	{
 //		fb.update(region, EInkFB.UPDATE_WAIT);
-		fb.update(region, EInkFB.UPDATE_MODE_PARTIAL);
+	//	fb.update(region, EInkFB.UPDATE_MODE_PARTIAL);
+		repaint(region,ClaySystem.getQuickRefresh());
 
 	}
 

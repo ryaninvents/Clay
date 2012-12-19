@@ -19,9 +19,9 @@ public abstract class Display
 		
 		gg.setBackground(Color.white);
 		gg.setColor(Color.white);
-		//gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		gg.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-		//gg.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
+		gg.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);
 		gg.setClip(0, 0, image.getWidth(), image.getHeight());
 		gg.fillRect(0, 0, image.getWidth(), image.getHeight());
 		gg.setColor(Color.black);

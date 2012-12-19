@@ -20,6 +20,7 @@ package com.mypapyri.clay.event;
  */
 
 import java.awt.AWTEvent;
+import java.awt.event.AWTEventListener;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -29,7 +30,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.EventListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,7 +39,7 @@ import java.util.logging.Logger;
  * 
  * @author notzed
  */
-public abstract class EventInput<XEvent extends AWTEvent,XListener extends EventListener> extends Thread {
+public abstract class EventInput<XEvent extends AWTEvent,XListener extends AWTEventListener> extends Thread {
 	// fields from linux/input.h:input_event
 
 	long time_s;

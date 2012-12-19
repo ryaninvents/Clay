@@ -1,6 +1,5 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -52,6 +51,7 @@ public class ClayOS extends App implements ActionListener{
 	
 
 	public static void main(String[] args) {
+		
 		EInkFB fb = null;
 		Display display = null;
 		if (System.getProperty("user.home").length() < 4) {
@@ -104,16 +104,13 @@ public class ClayOS extends App implements ActionListener{
 
 			App.setDisplay(display);
 			ClayOS su = new ClayOS();
+			ClaySystem.setActiveApp(su);
 			
 			while(su.getDisplay()==null){
 				System.out.print('.');
 				su.repaint();
 			}
 
-			Graphics2D g = display.getGraphics();
-			g.fillOval(0, 0, 100, 100);
-			su.update(g);
-			display.repaint();
 
 			SwingMouseInput smi = new SwingMouseInput();
 			((SwingDisplay)display).icon.addMouseListener(smi);
@@ -136,5 +133,7 @@ public class ClayOS extends App implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(((JButton)e.getSource()).getText());
+		((JButton)e.getSource()).setText("Poke! "+(System.currentTimeMillis()-ClaySystem.getLaunchTime())/1000);
+		reflow();
 	}
 }

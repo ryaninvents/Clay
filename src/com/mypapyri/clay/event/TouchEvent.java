@@ -46,7 +46,7 @@ public class TouchEvent extends MouseEvent {
 		this.type = type;
 	}
 	
-	public TouchEvent toPortrait(){
+	public TouchEvent toLandscape(){
 		return new TouchEvent(this.getWhen(),ClaySystem.getScreenWidth()-this.getY(),this.getX(), this.getType());
 	}
 

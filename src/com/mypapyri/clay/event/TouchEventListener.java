@@ -1,8 +1,8 @@
 package com.mypapyri.clay.event;
 
-import java.util.EventListener;
+import java.awt.event.AWTEventListener;
 
-public interface TouchEventListener extends EventListener {
+public interface TouchEventListener extends AWTEventListener {
 	public void onTap(TouchEvent e);
 	public void onLongTap(TouchEvent e);
 	public void onTouchDown(TouchEvent e);

@@ -20,7 +20,6 @@ package com.mypapyri.clay.event;
  */
 import java.awt.AWTEvent;
 import java.awt.Point;
-import java.awt.Toolkit;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -166,8 +165,12 @@ public class KoboTouchInput extends EventInput<TouchEvent, TouchEventListener> {
 	
 	@Override
 	public void fireEvent(TouchEvent ev) {
-		if (ClaySystem.isPortrait())
-			ev = ev.toPortrait();
+		
+		//Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(ev);
+		
+		
+		if (!ClaySystem.isLandscape())
+			ev = ev.toLandscape();
 		
 		int type = ev.getType();
 		ArrayList<TouchEventListener> listeners = getListeners();

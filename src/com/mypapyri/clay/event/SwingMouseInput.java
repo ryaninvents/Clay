@@ -97,8 +97,8 @@ public class SwingMouseInput extends EventInput<TouchEvent,TouchEventListener> i
 
 	@Override
 	public void fireEvent(TouchEvent ev) {
-		if (ClaySystem.isPortrait())
-			ev = ev.toPortrait();
+		if (ClaySystem.isLandscape())
+			ev = ev.toLandscape();
 		
 		int type = ev.getModifiers();
 		ArrayList<TouchEventListener> listeners = getListeners();

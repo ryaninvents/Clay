@@ -2,33 +2,45 @@ package com.mypapyri.clay;
 
 import java.awt.Dimension;
 
-import com.mypapyri.clay.ui.App;
+import com.mypapyri.clay.ui.CPanel;
 
 public class ClaySystem {
 	private static int dragThreshold = 15;
 	private static int swipeThreshold = 100;
 	private static int longClickThreshold = 1000;
 	
+	private static final long launchTime = System.currentTimeMillis();
+	private static boolean quickRefresh = false;
+	
 
+	public static boolean getQuickRefresh() {
+		return quickRefresh;
+	}
+	public static void setQuickRefresh(boolean quickRefresh) {
+		ClaySystem.quickRefresh = quickRefresh;
+	}
+	public static long getLaunchTime() {
+		return launchTime;
+	}
 	private static final int screenWidth = 600;
 	private static final int screenHeight = 800;
 	private static final Dimension screenSize = new Dimension(screenWidth,screenHeight);
 	
-	private static App activeApp;
+	private static CPanel activeApp;
 	
-	public static App getActiveApp() {
+	public static CPanel getActiveApp() {
 		return activeApp;
 	}
-	public static void setActiveApp(App activeApp) {
+	public static void setActiveApp(CPanel activeApp) {
 		ClaySystem.activeApp = activeApp;
 	}
-	private static boolean portrait = false;
+	private static boolean landscape = false;
 	
-	public static boolean isPortrait() {
-		return portrait;
+	public static boolean isLandscape() {
+		return landscape;
 	}
-	public static void setPortrait(boolean portrait) {
-		ClaySystem.portrait = portrait;
+	public static void setLandscape(boolean landscape) {
+		ClaySystem.landscape = landscape;
 	}
 	public static int getScreenWidth() {
 		return screenWidth;
