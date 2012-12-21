@@ -1,0 +1,3 @@
+echo Copying to Kobo...
+cp KoboRoot.tgz /media/KOBOeReader/.kobo
+echo Done.
