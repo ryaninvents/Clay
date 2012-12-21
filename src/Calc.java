@@ -18,13 +18,13 @@ import com.mypapyri.clay.ui.App;
 import com.mypapyri.clay.ui.TextField;
 import com.mypapyri.clay.ui.laf.ClayTheme;
 
-public class ClayOS extends App implements ActionListener{
+public class Calc extends App implements ActionListener{
 
 	private static final long serialVersionUID = 3343633470257570334L;
 	
 	JTextField text;
 
-	public ClayOS() {
+	public Calc() {
 		super();
 		
 		JPanel panel = this;
@@ -82,7 +82,7 @@ public class ClayOS extends App implements ActionListener{
 			}
 
 			App.setDisplay(display);
-			ClayOS su = new ClayOS();
+			Calc su = new Calc();
 			ClaySystem.setActiveApp(su);
 
 			KoboTouchInput kti = null;
@@ -114,7 +114,7 @@ public class ClayOS extends App implements ActionListener{
 			}
 
 			App.setDisplay(display);
-			ClayOS su = new ClayOS();
+			Calc su = new Calc();
 			ClaySystem.setActiveApp(su);
 			
 			while(su.getDisplay()==null){

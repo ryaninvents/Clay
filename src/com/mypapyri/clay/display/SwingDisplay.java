@@ -1,4 +1,4 @@
-package com.ramuller.clay.display;
+package com.mypapyri.clay.display;
 import java.awt.BorderLayout;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;

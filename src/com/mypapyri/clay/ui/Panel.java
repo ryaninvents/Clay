@@ -3,8 +3,6 @@ package com.mypapyri.clay.ui;
 import java.awt.AWTEvent;
 import java.awt.Component;
 import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,13 +11,12 @@ import javax.swing.JPanel;
 import com.mypapyri.clay.ClaySystem;
 import com.mypapyri.clay.event.TouchEvent;
 import com.mypapyri.clay.event.TouchEventListener;
-import com.ramuller.clay.display.Display;
 
-public class CPanel extends JPanel implements TouchEventListener{
+public class Panel extends JPanel implements TouchEventListener{
 	private static final long serialVersionUID = -669809789921280413L;
 	
 
-	public CPanel(){
+	public Panel(){
 		super();
 		
 		setSize(ClaySystem.getScreenSize());
@@ -41,11 +38,9 @@ public class CPanel extends JPanel implements TouchEventListener{
 			for(ActionListener l:listeners){
 				l.actionPerformed(ae);
 			}
-			if(c.isFocusable()){
-				
-			}
 		}
 	}
+	
 
 	@Override
 	public void onLongTap(TouchEvent e) {

@@ -4,13 +4,20 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 import com.mypapyri.clay.ClaySystem;
-import com.ramuller.clay.display.Display;
+import com.mypapyri.clay.display.Display;
+import com.mypapyri.clay.ui.keyboard.Keyboard;
 
-public class App extends CPanel {
+public class App extends Panel {
 	private static final long serialVersionUID = -669809789921280413L;
 	
 	private static Display display;
+	Keyboard vk;
 
+	
+	public App(){
+		super();
+		vk = new Keyboard();
+	}
 	
 	public static void setDisplay(Display display) {
 		App.display = display;

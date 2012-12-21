@@ -3,8 +3,6 @@ package com.mypapyri.clay.event;
 import java.awt.event.MouseEvent;
 
 import com.mypapyri.clay.ClaySystem;
-import com.ramuller.clay.event.EventType;
-import com.ramuller.clay.ui.Component;
 
 
 /*

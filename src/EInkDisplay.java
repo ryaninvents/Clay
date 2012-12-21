@@ -3,7 +3,7 @@
 import java.awt.Rectangle;
 
 import com.mypapyri.clay.ClaySystem;
-import com.ramuller.clay.display.Display;
+import com.mypapyri.clay.display.Display;
 
 
 public class EInkDisplay extends Display
