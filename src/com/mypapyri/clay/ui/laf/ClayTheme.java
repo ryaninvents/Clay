@@ -15,10 +15,10 @@ public class ClayTheme extends DefaultMetalTheme {
 	public String getName(){ return "Clay OS Theme"; }
 
 	public FontUIResource getControlTextFont(){
-		return new FontUIResource(ClaySystem.getUbuntu());
+		return new FontUIResource(ClaySystem.getSysFont());
 	}
 	public FontUIResource getUserTextFont(){
-		return new FontUIResource(ClaySystem.getUbuntu());
+		return new FontUIResource(ClaySystem.getSysFont());
 	}
 
 	public ColorUIResource getPrimary1(){

@@ -17,6 +17,9 @@ public class App extends Panel {
 	public App(){
 		super();
 		vk = new Keyboard();
+		
+		setSize(ClaySystem.getScreenSize());
+		
 	}
 	
 	public static void setDisplay(Display display) {

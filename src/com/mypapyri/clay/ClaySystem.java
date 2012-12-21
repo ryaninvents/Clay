@@ -3,6 +3,8 @@ package com.mypapyri.clay;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.mypapyri.clay.ui.Panel;
 
@@ -89,18 +91,30 @@ public class ClaySystem {
 
 	private static Font ubuntu;
 	
-	public static Font getUbuntu(){
-		if(ubuntu != null) return ubuntu;
+	private static Map<String, Font> fontList = new HashMap<String,Font>();
+	
+	public static Font getFont(String fnm){
+		if(fontList.containsKey(fnm)) return fontList.get(fnm);
 		try {
-			Font f = Font.createFont(Font.TRUETYPE_FONT, new File("/mnt/sd/assets/fonts/Ubuntu-R.ttf"));
+			Font f = Font.createFont(Font.TRUETYPE_FONT, new File("/mnt/sd/assets/fonts/"+fnm+".ttf"));
 			f = f.deriveFont(24f);
-			ubuntu = f;
+			fontList.put(fnm, f);
 			return f;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Font f = new Font("SansSerif",Font.PLAIN,24);
+			fontList.put(fnm, f);
 			return f;
 		}
+	}
+	
+	public static Font getFont(String name, int size){
+		Font f = getFont(name);
+		return f.deriveFont((float)size);
+	}
+	
+	public static Font getSysFont(){
+		return getFont("Comfortaa-Regular",32);
 	}
 }
