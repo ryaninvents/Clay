@@ -348,10 +348,11 @@ public class Calc extends App implements ActionListener{
 			str = str.replace("\u221a", "Math.sqrt");
 			try {
 				Object out = engine.eval(str);
-				textField.setText(out.toString());
+				if(out!=null)
+					textField.setText(out.toString());
 			} catch (ScriptException e1) {
-				e1.printStackTrace();
-				textField.setText("ERROR");
+				label.setText("Invalid expression, wah wah.");
+				textField.setText("");
 			}
 		}else if(e.getSource()==btnRefresh){
 			getDisplay().clear();
