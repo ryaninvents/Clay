@@ -1,3 +1,3 @@
 echo Copying to Kobo...
-cp KoboRoot.tgz /media/KOBOeReader/.kobo
+cp -r upgrade manifest.md5sum KoboRoot.tgz /media/KOBOeReader/.kobo
 echo Done.
