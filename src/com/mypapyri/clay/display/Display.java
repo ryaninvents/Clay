@@ -5,6 +5,8 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
+import com.mypapyri.clay.ClaySystem;
+
 
 public abstract class Display
 {
@@ -28,7 +30,11 @@ public abstract class Display
 	}
 	
 	public Graphics2D getGraphics(){
-		return (Graphics2D)gg.create();
+		Graphics2D g = (Graphics2D)gg.create();
+		if(!ClaySystem.isLandscape()){
+			g.rotate(Math.toRadians(-90), 300, 300); 
+		}
+		return g;
 	}
 	
 	public void clear(){

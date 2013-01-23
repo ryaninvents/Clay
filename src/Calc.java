@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 
+import au.notzed.fb.EInkFB;
+
 import com.mypapyri.clay.ClaySystem;
 import com.mypapyri.clay.display.Display;
 import com.mypapyri.clay.display.SwingDisplay;

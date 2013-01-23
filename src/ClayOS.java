@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 
+import au.notzed.fb.EInkFB;
+
 import com.mypapyri.clay.ClaySystem;
 import com.mypapyri.clay.display.Display;
 import com.mypapyri.clay.display.SwingDisplay;

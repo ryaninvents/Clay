@@ -2,6 +2,8 @@
 
 import java.awt.Rectangle;
 
+import au.notzed.fb.EInkFB;
+
 import com.mypapyri.clay.ClaySystem;
 import com.mypapyri.clay.display.Display;
 
